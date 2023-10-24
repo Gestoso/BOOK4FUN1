@@ -44,6 +44,10 @@ public class Register extends javax.swing.JFrame {
         contra2_text = new javax.swing.JLabel();
         boton_fondo = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        email_text = new javax.swing.JLabel();
+        email_field = new javax.swing.JTextField();
+        telefono_field = new javax.swing.JTextField();
+        telefono_text = new javax.swing.JLabel();
         imagen = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -122,6 +126,14 @@ public class Register extends javax.swing.JFrame {
             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
         );
 
+        email_text.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        email_text.setForeground(new java.awt.Color(255, 255, 255));
+        email_text.setText("Email:");
+
+        telefono_text.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        telefono_text.setForeground(new java.awt.Color(255, 255, 255));
+        telefono_text.setText("Telefono:");
+
         javax.swing.GroupLayout registroLayout = new javax.swing.GroupLayout(registro);
         registro.setLayout(registroLayout);
         registroLayout.setHorizontalGroup(
@@ -142,7 +154,11 @@ public class Register extends javax.swing.JFrame {
                     .addComponent(contra2_field, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(contra_field, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(contra2_text, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boton_fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boton_fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email_text, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email_field, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telefono_field, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telefono_text, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(448, 448, 448))
         );
         registroLayout.setVerticalGroup(
@@ -158,6 +174,14 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(apellido_text, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(apellido_field, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(email_text, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(email_field, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(telefono_text, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(telefono_field, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dni_text, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -176,7 +200,7 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(contra2_field, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(boton_fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(304, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         Panel_General.add(registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 1930, 890));
@@ -208,6 +232,14 @@ public class Register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Controlador.setDni(dni_field.getText());
+        Controlador.setNombre(nombre_field.getText());
+        Controlador.setApellido(apellido_field.getText());
+        Controlador.setEmail(email_field.getText());
+        Controlador.setTelefono(Integer.parseInt(telefono_field.getText()));
+        Controlador.setContrasenya(contra_field.getText());
+        Controlador.setDireccion(domicilio_field.getText());
+        System.out.println(Controlador.getDNI() + " " + Controlador.getNombre() + " " + Controlador.getApellido() + " " + Controlador.getEmail());
         BD.insertaUsuario(BD.makeConnection(), Controlador.getDNI(), Controlador.getNombre(), Controlador.getApellido(),Controlador.getEmail(), Controlador.getTelefono(),Controlador.getContrasenya(), Controlador.getDireccion());
         System.out.println("Bien");
         
@@ -264,6 +296,8 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel dni_text;
     private javax.swing.JTextField domicilio_field;
     private javax.swing.JLabel domicilio_text;
+    private javax.swing.JTextField email_field;
+    private javax.swing.JLabel email_text;
     private javax.swing.JPanel imagen;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -271,5 +305,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel nombre_text;
     private javax.swing.JPanel registro;
     private javax.swing.JLabel registro_text;
+    private javax.swing.JTextField telefono_field;
+    private javax.swing.JLabel telefono_text;
     // End of variables declaration//GEN-END:variables
 }

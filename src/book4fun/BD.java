@@ -89,28 +89,28 @@ try {
     }
     public static void insertaUsuario(Connection conn, String dni, String nombre, String apellido, String email, int telefono, String contrasenya, String direccion) {
         
-        String sql = "INSERT INTO USUARIOS (ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, CONTRASENYA, DIRECCION) " + "VALUES (GENERAID.nextval, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-        preparedStatement.setString(2, dni);
-        preparedStatement.setString(3, nombre);
-        preparedStatement.setString(4, apellido);
-        preparedStatement.setString(5, email);
-        preparedStatement.setInt(6, telefono);
-        preparedStatement.setString(7, contrasenya);
-        preparedStatement.setString(8, direccion);
-            ResultSet rs = preparedStatement.executeQuery();
+        String sql = "INSERT INTO USUARIOS (DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, CONTRASENYA, DIRECCION) VALUES (GENERAID.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 
-            if (rs.next()) {
-                dni = rs.getString("DNI");
-                nombre = rs.getString("NOMBRE");
-                apellido = rs.getString("APELLIDO");
-                email = rs.getString("EMAIL");
-                telefono = rs.getInt("TELEFONO");
-                direccion = rs.getString("DIRECCION");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al comprobar el usuario: " + e);
-        }
+try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+    preparedStatement.setString(1, dni);
+    preparedStatement.setString(2, nombre);
+    preparedStatement.setString(3, apellido);
+    preparedStatement.setString(4, email);
+    preparedStatement.setInt(5, telefono);
+    preparedStatement.setString(6, contrasenya);
+    preparedStatement.setString(7, direccion);
+
+    int filasAfectadas = preparedStatement.executeUpdate();
+    
+    if (filasAfectadas > 0) {
+        System.out.println("Usuario insertado correctamente.");
+    } else {
+        System.out.println("No se pudo insertar el usuario.");
+    }
+} catch (SQLException e) {
+    System.out.println("Error al insertar el usuario: " + e);
+}
+
 }
     
 public static int comprobarUsuario() {

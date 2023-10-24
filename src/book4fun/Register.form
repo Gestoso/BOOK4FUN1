@@ -105,6 +105,10 @@
                           <Component id="contra_field" alignment="2" min="-2" pref="1028" max="-2" attributes="0"/>
                           <Component id="contra2_text" alignment="2" min="-2" pref="1028" max="-2" attributes="0"/>
                           <Component id="boton_fondo" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="email_text" alignment="2" min="-2" pref="1028" max="-2" attributes="0"/>
+                          <Component id="email_field" alignment="2" min="-2" pref="1028" max="-2" attributes="0"/>
+                          <Component id="telefono_field" alignment="2" min="-2" pref="1028" max="-2" attributes="0"/>
+                          <Component id="telefono_text" alignment="2" min="-2" pref="1028" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="448" max="-2" attributes="0"/>
                   </Group>
@@ -124,6 +128,14 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="apellido_field" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="email_text" min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="email_field" min="-2" pref="22" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="telefono_text" min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="telefono_field" min="-2" pref="22" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="dni_text" min="-2" pref="17" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="dni_field" min="-2" pref="22" max="-2" attributes="0"/>
@@ -141,7 +153,7 @@
                       <Component id="contra2_field" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Component id="boton_fondo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="304" max="32767" attributes="0"/>
+                      <EmptySpace pref="202" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -285,6 +297,32 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JLabel" name="email_text">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI Black" size="12" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Email:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="email_field">
+            </Component>
+            <Component class="javax.swing.JTextField" name="telefono_field">
+            </Component>
+            <Component class="javax.swing.JLabel" name="telefono_text">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI Black" size="12" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Telefono:"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="imagen">

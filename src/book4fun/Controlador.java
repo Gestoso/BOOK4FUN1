@@ -70,28 +70,28 @@ public class Controlador {
         this.id = id;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public static void setDni(String dni) {
+        Controlador.dni = dni;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public static void setNombre(String nombre) {
+        Controlador.nombre = nombre;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public static void setApellido(String apellido) {
+        Controlador.apellido = apellido;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public static void setEmail(String email) {
+        Controlador.email = email;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public static void setTelefono(int telefono) {
+        Controlador.telefono = telefono;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public static void setDireccion(String direccion) {
+        Controlador.direccion = direccion;
     }
 
     public static void setFound(boolean found) {
