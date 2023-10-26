@@ -170,30 +170,10 @@ public class Login extends javax.swing.JFrame {
         Controlador.setUsuario(nombre_field.getText());
         Controlador.setContrasenya(contra_field.getText());
         System.out.println("Nombre: " + Controlador.getUsuario() + " Contra: " + Controlador.getContrasenya());
-        Controlador result = BD.comprobarUsuario(BD.makeConnection());
+        Usuario usu = BD.comprobarUsuario();
 
-if (result.isFound()) {
-    Map<String, Object> userData = result.toMap();
-
-    // Accede a los datos del usuario en el Map
-    int id = (int) userData.get("id");
-    String dni = (String) userData.get("dni");
-    String nombre = (String) userData.get("nombre");
-    String apellido = (String) userData.get("apellido");
-    String email = (String) userData.get("email");
-    int telefono = (int) userData.get("telefono");
-    String contrasenya = (String) userData.get("contrasenya");
-    String direccion = (String) userData.get("direccion");
-
-    System.out.println("Inicio de sesión exitoso.");
-    System.out.println("ID: " + id);
-    System.out.println("DNI: " + dni);
-    System.out.println("Nombre: " + nombre);
-    System.out.println("Apellido: " + apellido);
-    System.out.println("Email: " + email);
-    System.out.println("Teléfono: " + telefono);
-    System.out.println("Contraseña: " + contrasenya);
-    System.out.println("Dirección: " + direccion);
+if (usu != null) {
+    System.out.println("Cheeeeeeeeck");
 } else {
     System.out.println("Inicio de sesión fallido. Verifica tus credenciales.");
 }

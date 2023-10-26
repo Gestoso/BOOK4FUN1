@@ -87,55 +87,93 @@ try {
 
         }
     }
-    public static void insertaUsuario(Connection conn, String dni, String nombre, String apellido, String email, int telefono, String contrasenya, String direccion) {
-        
-        String sql = "INSERT INTO USUARIOS (ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, CONTRASENYA, DIRECCION) VALUES (IDUSU.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
+    public static Usuario insertaUsuario(Connection conn, String dni, String nombre, String apellido, String email, int telefono, String contrasenya, String direccion) {
+    String sql = "INSERT INTO USUARIOS (ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, CONTRASENYA, DIRECCION) VALUES (IDUSU.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
 
-try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-    preparedStatement.setString(1, dni);
-    preparedStatement.setString(2, nombre);
-    preparedStatement.setString(3, apellido);
-    preparedStatement.setString(4, email);
-    preparedStatement.setInt(5, telefono);
-    preparedStatement.setString(6, contrasenya);
-    preparedStatement.setString(7, direccion);
+    try (PreparedStatement preparedStatement = conn.prepareStatement(sql, new String[] { "ID" })) {
+        preparedStatement.setString(1, dni);
+        preparedStatement.setString(2, nombre);
+        preparedStatement.setString(3, apellido);
+        preparedStatement.setString(4, email);
+        preparedStatement.setInt(5, telefono);
+        preparedStatement.setString(6, contrasenya);
+        preparedStatement.setString(7, direccion);
 
-    int filasAfectadas = preparedStatement.executeUpdate();
-    
-    if (filasAfectadas > 0) {
-        System.out.println("Usuario insertado correctamente.");
-    } else {
-        System.out.println("No se pudo insertar el usuario.");
+        int filasAfectadas = preparedStatement.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+
+            if (generatedKeys.next()) {
+                int id = generatedKeys.getInt(1);
+                System.out.println("ID del usuario insertado: " + id);
+                // Crea una instancia de Usuario con los datos insertados y el ID generado
+                Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, contrasenya, direccion);
+                return usuario;
+            }
+        } else {
+            System.out.println("No se pudo insertar el usuario.");
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al insertar el usuario: " + e);
     }
-} catch (SQLException e) {
-    System.out.println("Error al insertar el usuario: " + e);
+    return null;
 }
 
-}
     
-public static int comprobarUsuario() {
-    int id = 1;
-    String sql = "Select ID from USUARIO where NOMBRE = '" + Controlador.getUsuario() + "' and CONTRASENYA = '" + Controlador.getContrasenya() + "'";
-    Statement st = null;
+public static Usuario comprobarUsuario() {
+    String sql = "SELECT ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, DIRECCION FROM USUARIOS WHERE NOMBRE = ? AND CONTRASENYA = ?";
     
+    Connection conn = makeConnection();
+    PreparedStatement st = null;
+    ResultSet resultSet = null;
+
     try {
-        // Establece la conexión a la base de datos
-        Connection conn = makeConnection(); // Reemplaza TuClaseDeConexion con la clase que utilizas para conectarte a la base de datos
-        
-        st = conn.createStatement();
-        ResultSet rs = st.executeQuery(sql);
+        st = conn.prepareStatement(sql);
+        st.setString(1, Controlador.getUsuario());
+        st.setString(2, Controlador.getContrasenya());
+        resultSet = st.executeQuery();
 
-        while (rs.next()) {
-            id = rs.getInt("ID");
+        if (resultSet.next()) {
+            int id = resultSet.getInt("ID");
+            String dni = resultSet.getString("DNI");
+            String nombre = resultSet.getString("NOMBRE");
+            String apellido = resultSet.getString("APELLIDO");
+            String email = resultSet.getString("EMAIL");
+            int telefono = resultSet.getInt("TELEFONO");
+            String direccion = resultSet.getString("DIRECCION");
+            
+            Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, Controlador.getContrasenya(), direccion);
+            return usuario;
         }
 
-        st.close();
-        conn.close(); // No olvides cerrar la conexión
-
     } catch (SQLException e) {
-        System.out.println("The Select had problems!! " + e);
+        System.out.println("Error al comprobar el usuario: " + e);
+    } finally {
+        // Asegúrate de cerrar la conexión, el PreparedStatement y el ResultSet en un bloque finally
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                // Manejar la excepción
+            }
+        }
+        if (st != null) {
+            try {
+                st.close();
+            } catch (SQLException e) {
+                // Manejar la excepción
+            }
+        }
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // Manejar la excepción
+            }
+        }
     }
 
-    return id;
+    return null;
 }
 }

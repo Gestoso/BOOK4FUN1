@@ -6,8 +6,8 @@ public class Main {
     public static void main(String[] args) {
         BD.makeConnection();
         // Crea una instancia del JFrame Login
-        book4fun.Register loginFrame = new book4fun.Register(); // Utiliza el nombre completo del paquete y la clase
-
+        //book4fun.Register loginFrame = new book4fun.Register(); // Utiliza el nombre completo del paquete y la clase
+        book4fun.Login loginFrame = new book4fun.Login();
         // Configura el comportamiento al cerrar
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
