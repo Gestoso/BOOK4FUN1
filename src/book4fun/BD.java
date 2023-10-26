@@ -89,7 +89,7 @@ try {
     }
     public static void insertaUsuario(Connection conn, String dni, String nombre, String apellido, String email, int telefono, String contrasenya, String direccion) {
         
-        String sql = "INSERT INTO USUARIOS (DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, CONTRASENYA, DIRECCION) VALUES (GENERAID.NEXTVAL, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO USUARIOS (ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, CONTRASENYA, DIRECCION) VALUES (IDUSU.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
 
 try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
     preparedStatement.setString(1, dni);
