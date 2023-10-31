@@ -16,7 +16,9 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Register
      */
     public Login() {
+        
         initComponents();
+        mensaje_error.setVisible(false);
     }
 
     /**
@@ -35,9 +37,14 @@ public class Login extends javax.swing.JFrame {
         nombre_text = new javax.swing.JLabel();
         nombre_field = new javax.swing.JTextField();
         contra_text = new javax.swing.JLabel();
-        contra_field = new javax.swing.JTextField();
         boton_fondo = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        boton_register = new javax.swing.JButton();
+        mensaje_error = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        boton_error = new javax.swing.JButton();
+        contra_field = new javax.swing.JPasswordField();
         imagen = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -61,24 +68,29 @@ public class Login extends javax.swing.JFrame {
         Panel_General.add(Raya_verde, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 1930, 10));
 
         registro.setBackground(new java.awt.Color(33, 40, 42));
+        registro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         registro_text.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         registro_text.setForeground(new java.awt.Color(255, 255, 255));
         registro_text.setText("Iniciar Sesion");
+        registro.add(registro_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 108, 1028, -1));
 
         nombre_text.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         nombre_text.setForeground(new java.awt.Color(255, 255, 255));
         nombre_text.setText("Nombre:");
+        registro.add(nombre_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 162, 1028, -1));
 
         nombre_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombre_fieldActionPerformed(evt);
             }
         });
+        registro.add(nombre_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 185, 1028, -1));
 
         contra_text.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         contra_text.setForeground(new java.awt.Color(255, 255, 255));
         contra_text.setText("Contraseña:");
+        registro.add(contra_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 213, 1028, -1));
 
         boton_fondo.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -98,45 +110,77 @@ public class Login extends javax.swing.JFrame {
         boton_fondo.setLayout(boton_fondoLayout);
         boton_fondoLayout.setHorizontalGroup(
             boton_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(boton_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(boton_fondoLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         boton_fondoLayout.setVerticalGroup(
             boton_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+            .addGap(0, 80, Short.MAX_VALUE)
+            .addGroup(boton_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(boton_fondoLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        javax.swing.GroupLayout registroLayout = new javax.swing.GroupLayout(registro);
-        registro.setLayout(registroLayout);
-        registroLayout.setHorizontalGroup(
-            registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registroLayout.createSequentialGroup()
-                .addGap(448, 448, 448)
-                .addGroup(registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(nombre_field, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombre_text, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contra_text, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(registro_text, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contra_field, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boton_fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(448, 448, 448))
-        );
-        registroLayout.setVerticalGroup(
-            registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(registroLayout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(registro_text, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombre_text, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombre_field, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contra_text, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contra_field, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(250, 250, 250)
-                .addComponent(boton_fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(304, Short.MAX_VALUE))
-        );
+        registro.add(boton_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 310, -1, 80));
+
+        boton_register.setBackground(new java.awt.Color(139, 195, 73));
+        boton_register.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        boton_register.setForeground(new java.awt.Color(255, 255, 255));
+        boton_register.setText("<html> No tiene cuenta?<br>Regístrate <html>");
+        boton_register.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        boton_register.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        boton_register.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        boton_register.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_registerActionPerformed(evt);
+            }
+        });
+        registro.add(boton_register, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 490, 250, 78));
+
+        mensaje_error.setBackground(new java.awt.Color(255, 255, 255));
+        mensaje_error.setMinimumSize(new java.awt.Dimension(500, 500));
+        mensaje_error.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(197, 0, 51));
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setText("ERROR");
+        jTextField1.setActionCommand("<Not Set>");
+        jTextField1.setBorder(null);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        mensaje_error.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, -1));
+
+        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField2.setText("Nombre de Usuario y/o Contraseña Incorrectos");
+        jTextField2.setBorder(null);
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        mensaje_error.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 430, 80));
+
+        boton_error.setText("OK");
+        boton_error.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_errorActionPerformed(evt);
+            }
+        });
+        mensaje_error.add(boton_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 140, 140, 30));
+
+        registro.add(mensaje_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 430, 180));
+        registro.add(contra_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, 1028, -1));
 
         Panel_General.add(registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 1930, 890));
 
@@ -174,8 +218,12 @@ public class Login extends javax.swing.JFrame {
 
 if (usu != null) {
     System.out.println("Cheeeeeeeeck");
+    Principal Frame = new Principal(); // Crea una instancia del JFrame "Register"
+    Frame.setVisible(true); // Hace visible el JFrame "Register"
+    this.dispose();
 } else {
     System.out.println("Inicio de sesión fallido. Verifica tus credenciales.");
+    mensaje_error.setVisible(true);
 }
        
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -183,6 +231,25 @@ if (usu != null) {
     private void nombre_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombre_fieldActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void boton_errorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_errorActionPerformed
+        mensaje_error.setVisible(false);
+        
+    }//GEN-LAST:event_boton_errorActionPerformed
+
+    private void boton_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_registerActionPerformed
+        Register Frame = new Register(); // Crea una instancia del JFrame "Register"
+    Frame.setVisible(true); // Hace visible el JFrame "Register"
+    this.dispose();
+    }//GEN-LAST:event_boton_registerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,12 +268,17 @@ if (usu != null) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_General;
     private javax.swing.JPanel Raya_verde;
+    private javax.swing.JButton boton_error;
     private javax.swing.JPanel boton_fondo;
-    private javax.swing.JTextField contra_field;
+    private javax.swing.JButton boton_register;
+    private javax.swing.JPasswordField contra_field;
     private javax.swing.JLabel contra_text;
     private javax.swing.JPanel imagen;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel mensaje_error;
     private javax.swing.JTextField nombre_field;
     private javax.swing.JLabel nombre_text;
     private javax.swing.JPanel registro;
