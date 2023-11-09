@@ -5,7 +5,11 @@
 package book4fun;
 
 import java.util.Map;
-
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import book4fun.Usuario;
+import java.net.URL;
+import javax.swing.JButton;
 /**
  *
  * @author gesto
@@ -17,6 +21,16 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+    }
+    public static void icono() {
+        
+                Usuario usu = BD.comprobarUsuario();
+
+      ImageIcon icon = new ImageIcon(new URL(usu.getImgURL()));
+
+// Crea un botón y establece el icono
+JButton perfil = new JButton();
+perfil.setIcon(icon);
     }
 
     /**
@@ -31,10 +45,10 @@ public class Principal extends javax.swing.JFrame {
         Panel_General = new javax.swing.JPanel();
         Raya_verde1 = new javax.swing.JPanel();
         SideBar = new javax.swing.JPanel();
-        perfil = new javax.swing.JLabel();
         lista = new javax.swing.JLabel();
         favoritos = new javax.swing.JLabel();
         buscador1 = new javax.swing.JLabel();
+        perfil = new javax.swing.JButton();
         filtro = new javax.swing.JPanel();
         contra_field = new javax.swing.JTextField();
         contra_field1 = new javax.swing.JTextField();
@@ -115,12 +129,6 @@ public class Principal extends javax.swing.JFrame {
         SideBar.setBackground(new java.awt.Color(33, 40, 42));
         SideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        perfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/profile.png"))); // NOI18N
-        perfil.setText("jLabel2");
-        perfil.setMaximumSize(new java.awt.Dimension(40, 40));
-        perfil.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(perfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 50, 50));
-
         lista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/lista2.PNG"))); // NOI18N
         lista.setText("jLabel2");
         lista.setMaximumSize(new java.awt.Dimension(40, 40));
@@ -137,7 +145,17 @@ public class Principal extends javax.swing.JFrame {
         buscador1.setText("buscador");
         buscador1.setMaximumSize(new java.awt.Dimension(40, 40));
         buscador1.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(buscador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 50, 50));
+        SideBar.add(buscador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 50, 50));
+
+        perfil.setForeground(new java.awt.Color(255, 255, 255));
+        perfil.setIcon(icon);
+        perfil.setBorder(null);
+        perfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perfilActionPerformed(evt);
+            }
+        });
+        SideBar.add(perfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 70, 60));
 
         Panel_General.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 100, 1070));
 
@@ -711,6 +729,14 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilActionPerformed
+
+        Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
+    Frame.setVisible(true); // Hace visible el JFrame "Register"
+    this.dispose();
+
+    }//GEN-LAST:event_perfilActionPerformed
     
     /**
      * @param args the command line arguments
@@ -788,7 +814,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel nombre_text7;
     private javax.swing.JLabel nombre_text8;
     private javax.swing.JLabel nombre_text9;
-    private javax.swing.JLabel perfil;
+    private javax.swing.JButton perfil;
     private javax.swing.JPanel registro;
     private javax.swing.JPanel registro1;
     // End of variables declaration//GEN-END:variables

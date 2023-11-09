@@ -9,7 +9,7 @@ package book4fun;
  * @author gesto
  */
 public class Register extends javax.swing.JFrame {
-    boolean campos = false;
+    boolean campos = true;
     /**
      * Creates new form Register
      */
@@ -28,6 +28,10 @@ public class Register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mensaje_error = new javax.swing.JPanel();
+        boton_error = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         Panel_General = new javax.swing.JPanel();
         Raya_verde = new javax.swing.JPanel();
         registro = new javax.swing.JPanel();
@@ -51,15 +55,48 @@ public class Register extends javax.swing.JFrame {
         boton_register = new javax.swing.JButton();
         contra_field2 = new javax.swing.JPasswordField();
         contra_field = new javax.swing.JPasswordField();
-        mensaje_error = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        boton_error = new javax.swing.JButton();
         imagen = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1920, 1080));
+
+        mensaje_error.setBackground(new java.awt.Color(255, 255, 255));
+        mensaje_error.setMinimumSize(new java.awt.Dimension(500, 500));
+        mensaje_error.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        boton_error.setText("OK");
+        boton_error.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_errorActionPerformed(evt);
+            }
+        });
+        mensaje_error.add(boton_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 140, 140, 30));
+
+        jTextField1.setEditable(false);
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(197, 0, 51));
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setText("ERROR");
+        jTextField1.setActionCommand("<Not Set>");
+        jTextField1.setBorder(null);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        mensaje_error.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, -1));
+
+        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField2.setText("Nombre de Usuario y/o Contraseña Incorrectos");
+        jTextField2.setBorder(null);
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        mensaje_error.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 430, 80));
 
         Panel_General.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -160,42 +197,6 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
-        mensaje_error.setBackground(new java.awt.Color(255, 255, 255));
-        mensaje_error.setMinimumSize(new java.awt.Dimension(500, 500));
-        mensaje_error.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(197, 0, 51));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("ERROR");
-        jTextField1.setActionCommand("<Not Set>");
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        mensaje_error.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, -1));
-
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setText("Nombre de Usuario y/o Contraseña Incorrectos");
-        jTextField2.setBorder(null);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        mensaje_error.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 430, 80));
-
-        boton_error.setText("OK");
-        boton_error.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_errorActionPerformed(evt);
-            }
-        });
-        mensaje_error.add(boton_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 140, 140, 30));
-
         javax.swing.GroupLayout registroLayout = new javax.swing.GroupLayout(registro);
         registro.setLayout(registroLayout);
         registroLayout.setHorizontalGroup(
@@ -223,16 +224,11 @@ public class Register extends javax.swing.JFrame {
                     .addComponent(contra_field2, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(contra_field, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(448, 448, 448))
-            .addGroup(registroLayout.createSequentialGroup()
-                .addGap(695, 695, 695)
-                .addComponent(mensaje_error, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         registroLayout.setVerticalGroup(
             registroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(registroLayout.createSequentialGroup()
-                .addComponent(mensaje_error, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(186, 186, 186)
                 .addComponent(registro_text, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nombre_text, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,12 +286,22 @@ public class Register extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Panel_General, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(mensaje_error, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Panel_General, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(mensaje_error, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -360,6 +366,7 @@ public class Register extends javax.swing.JFrame {
         }
         
         if (campos) {
+            
             Usuario usu = BD.insertaUsuario(BD.makeConnection(), Controlador.getDNI(), Controlador.getNombre(), Controlador.getApellido(),Controlador.getEmail(), Controlador.getTelefono(),Controlador.getContrasenya(), Controlador.getDireccion());
         if (usu == null) {
             

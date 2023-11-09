@@ -88,8 +88,9 @@ try {
         }
     }
     public static Usuario insertaUsuario(Connection conn, String dni, String nombre, String apellido, String email, int telefono, String contrasenya, String direccion) {
-    String sql = "INSERT INTO USUARIOS (ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, CONTRASENYA, DIRECCION) VALUES (IDUSU.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
-
+    String sql = "INSERT INTO USUARIOS (ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, CONTRASENYA, DIRECCION, IMG) VALUES (IDUSU.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String img = "https://imgur.com/sbFLV8b.png"; // URL directamente en la función
+    
     try (PreparedStatement preparedStatement = conn.prepareStatement(sql, new String[] { "ID" })) {
         preparedStatement.setString(1, dni);
         preparedStatement.setString(2, nombre);
@@ -98,7 +99,8 @@ try {
         preparedStatement.setInt(5, telefono);
         preparedStatement.setString(6, contrasenya);
         preparedStatement.setString(7, direccion);
-
+        preparedStatement.setString(8, img);
+System.out.println("Pasa");
         int filasAfectadas = preparedStatement.executeUpdate();
 
         if (filasAfectadas > 0) {
@@ -108,7 +110,7 @@ try {
                 int id = generatedKeys.getInt(1);
                 System.out.println("ID del usuario insertado: " + id);
                 // Crea una instancia de Usuario con los datos insertados y el ID generado
-                Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, contrasenya, direccion);
+                Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, contrasenya, direccion, img);
                 return usuario;
             }
         } else {
@@ -142,8 +144,9 @@ public static Usuario comprobarUsuario() {
             String email = resultSet.getString("EMAIL");
             int telefono = resultSet.getInt("TELEFONO");
             String direccion = resultSet.getString("DIRECCION");
+            String img = resultSet.getString("IMG");
             
-            Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, Controlador.getContrasenya(), direccion);
+            Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, Controlador.getContrasenya(), direccion, img);
             return usuario;
         }
 

@@ -4,6 +4,8 @@
  */
 package book4fun;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author gesto
@@ -17,9 +19,10 @@ public class Usuario {
     private int telefono;
     private String contrasenya;
     private String direccion;
+    public String img;
 
     // Constructor
-    public Usuario(int id, String dni, String nombre, String apellido, String email, int telefono, String contrasenya, String direccion) {
+    public Usuario(int id, String dni, String nombre, String apellido, String email, int telefono, String contrasenya, String direccion, String url) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
@@ -28,6 +31,16 @@ public class Usuario {
         this.telefono = telefono;
         this.contrasenya = contrasenya;
         this.direccion = direccion;
+        this.img = img;
+    }
+
+    public String getImgURL() {
+        return img;
+    }
+
+    public ImageIcon cargarImagen() {
+        ImageIcon icon = new ImageIcon(img);
+        return icon;
     }
 
     public int getId() {
