@@ -5,16 +5,13 @@
 package book4fun;
 
 import java.util.Map;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
-/**
- *
- * @author gesto
- */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Register
-     */
+    public int id;
+    
     public Login() {
         initComponents();
     }
@@ -167,33 +164,22 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         Controlador.setUsuario(nombre_field.getText());
         Controlador.setContrasenya(contra_field.getText());
         System.out.println("Nombre: " + Controlador.getUsuario() + " Contra: " + Controlador.getContrasenya());
         Controlador result = BD.comprobarUsuario(BD.makeConnection());
 
 if (result.isFound()) {
-    Map<String, Object> userData = result.toMap();
-
-    // Accede a los datos del usuario en el Map
-    int id = (int) userData.get("id");
-    String dni = (String) userData.get("dni");
-    String nombre = (String) userData.get("nombre");
-    String apellido = (String) userData.get("apellido");
-    String email = (String) userData.get("email");
-    int telefono = (int) userData.get("telefono");
-    String contrasenya = (String) userData.get("contrasenya");
-    String direccion = (String) userData.get("direccion");
-
-    System.out.println("Inicio de sesión exitoso.");
-    System.out.println("ID: " + id);
-    System.out.println("DNI: " + dni);
-    System.out.println("Nombre: " + nombre);
-    System.out.println("Apellido: " + apellido);
-    System.out.println("Email: " + email);
-    System.out.println("Teléfono: " + telefono);
-    System.out.println("Contraseña: " + contrasenya);
-    System.out.println("Dirección: " + direccion);
+  
+     dispose();
+        
+        // Crea una instancia del JFrame de PaginaPrincipal
+        PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+        
+        // Muestra el JFrame de PaginaPrincipal
+        paginaPrincipal.setVisible(true);
+    
 } else {
     System.out.println("Inicio de sesión fallido. Verifica tus credenciales.");
 }

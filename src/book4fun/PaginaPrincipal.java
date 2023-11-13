@@ -4,19 +4,33 @@
  */
 package book4fun;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Map;
-
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 /**
  *
  * @author gesto
  */
 public class PaginaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Register
-     */
+    public boolean entrado = true;
+    public int creditos;
     public PaginaPrincipal() {
         initComponents();
+        
+        creditos = BD.comprobarUsuario().getCreditos();
+        nCreditos.setText(String.valueOf(creditos));
+
+        panelCreditos.setVisible(false);
+        panelNoTransRealizada.setVisible(false);
+        panelTransRealizada.setVisible(false);
+        panelNoPosible.setVisible(false);
+
     }
 
     /**
@@ -29,12 +43,37 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         Panel_General = new javax.swing.JPanel();
-        Raya_verde1 = new javax.swing.JPanel();
+        panelCreditos = new javax.swing.JPanel();
+        panelTransRealizada = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        panelNoPosible = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        panelNoTransRealizada = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        boton100 = new javax.swing.JButton();
+        inputDinero = new javax.swing.JTextField();
+        txtIngresarDinero = new javax.swing.JLabel();
+        boton30 = new javax.swing.JButton();
+        boton50 = new javax.swing.JButton();
+        boton10 = new javax.swing.JButton();
+        transferencia = new javax.swing.JButton();
         SideBar = new javax.swing.JPanel();
-        perfil = new javax.swing.JLabel();
         lista = new javax.swing.JLabel();
         favoritos = new javax.swing.JLabel();
         buscador1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        botonCreditos = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        nCreditos1 = new javax.swing.JLabel();
+        nCreditos = new javax.swing.JLabel();
+        Raya_verde1 = new javax.swing.JPanel();
         filtro = new javax.swing.JPanel();
         contra_field = new javax.swing.JTextField();
         contra_field1 = new javax.swing.JTextField();
@@ -97,6 +136,309 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         Panel_General.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelCreditos.setBackground(new java.awt.Color(33, 40, 42));
+        panelCreditos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 195, 73)));
+        panelCreditos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelTransRealizada.setBackground(new java.awt.Color(255, 201, 14));
+
+        jLabel5.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel5.setText("realizada ");
+
+        jLabel19.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel19.setText("Transeferencia ");
+
+        jButton2.setBackground(new java.awt.Color(33, 40, 42));
+        jButton2.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(139, 195, 73));
+        jButton2.setText("Completar");
+        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 195, 73), 2));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelTransRealizadaLayout = new javax.swing.GroupLayout(panelTransRealizada);
+        panelTransRealizada.setLayout(panelTransRealizadaLayout);
+        panelTransRealizadaLayout.setHorizontalGroup(
+            panelTransRealizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTransRealizadaLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addGroup(panelTransRealizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addContainerGap(177, Short.MAX_VALUE))
+            .addGroup(panelTransRealizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelTransRealizadaLayout.createSequentialGroup()
+                    .addGap(75, 75, 75)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(105, 105, 105)))
+        );
+        panelTransRealizadaLayout.setVerticalGroup(
+            panelTransRealizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTransRealizadaLayout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+            .addGroup(panelTransRealizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelTransRealizadaLayout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(213, Short.MAX_VALUE)))
+        );
+
+        panelCreditos.add(panelTransRealizada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 360));
+
+        panelNoPosible.setBackground(new java.awt.Color(255, 201, 14));
+
+        jLabel22.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel22.setText("entre 10");
+
+        jLabel23.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel23.setText("Los numero tienen");
+
+        jButton4.setBackground(new java.awt.Color(33, 40, 42));
+        jButton4.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(139, 195, 73));
+        jButton4.setText("Cerrar");
+        jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 195, 73), 2));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel24.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel24.setText("que ser divisibles ");
+
+        javax.swing.GroupLayout panelNoPosibleLayout = new javax.swing.GroupLayout(panelNoPosible);
+        panelNoPosible.setLayout(panelNoPosibleLayout);
+        panelNoPosibleLayout.setHorizontalGroup(
+            panelNoPosibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNoPosibleLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addGroup(panelNoPosibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNoPosibleLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(panelNoPosibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNoPosibleLayout.createSequentialGroup()
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNoPosibleLayout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addGap(33, 33, 33))))
+        );
+        panelNoPosibleLayout.setVerticalGroup(
+            panelNoPosibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNoPosibleLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        panelCreditos.add(panelNoPosible, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 360));
+
+        panelNoTransRealizada.setBackground(new java.awt.Color(255, 201, 14));
+
+        jLabel20.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel20.setText("realizada ");
+
+        jButton3.setBackground(new java.awt.Color(33, 40, 42));
+        jButton3.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(139, 195, 73));
+        jButton3.setText("Cerrar");
+        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 195, 73), 2));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel21.setText("Transaccion no");
+
+        javax.swing.GroupLayout panelNoTransRealizadaLayout = new javax.swing.GroupLayout(panelNoTransRealizada);
+        panelNoTransRealizada.setLayout(panelNoTransRealizadaLayout);
+        panelNoTransRealizadaLayout.setHorizontalGroup(
+            panelNoTransRealizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNoTransRealizadaLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addGroup(panelNoTransRealizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNoTransRealizadaLayout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+        );
+        panelNoTransRealizadaLayout.setVerticalGroup(
+            panelNoTransRealizadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNoTransRealizadaLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+
+        panelCreditos.add(panelNoTransRealizada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 360));
+
+        boton100.setFont(new java.awt.Font("Arial Black", 0, 20)); // NOI18N
+        boton100.setText("100€");
+        boton100.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton100ActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(boton100, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 56, 85, 85));
+
+        inputDinero.setToolTipText("");
+        inputDinero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputDineroActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(inputDinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 230, 394, 52));
+
+        txtIngresarDinero.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        txtIngresarDinero.setForeground(new java.awt.Color(139, 195, 73));
+        txtIngresarDinero.setText("Ingresa el dinero que quieras cambiar:");
+        panelCreditos.add(txtIngresarDinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 190, 373, 34));
+
+        boton30.setFont(new java.awt.Font("Arial Black", 0, 25)); // NOI18N
+        boton30.setText("30€");
+        boton30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton30ActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(boton30, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 56, 85, 85));
+
+        boton50.setFont(new java.awt.Font("Arial Black", 0, 25)); // NOI18N
+        boton50.setText("50€");
+        boton50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton50ActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(boton50, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 56, 85, 85));
+
+        boton10.setFont(new java.awt.Font("Arial Black", 0, 25)); // NOI18N
+        boton10.setText("10€");
+        boton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton10ActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(boton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 56, 85, 85));
+
+        transferencia.setBackground(new java.awt.Color(33, 40, 42));
+        transferencia.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        transferencia.setForeground(new java.awt.Color(139, 195, 73));
+        transferencia.setText("Completar Transferencia");
+        transferencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 195, 73), 2));
+        transferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transferenciaActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(transferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 300, 175, 56));
+
+        Panel_General.add(panelCreditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 450, 390));
+
+        SideBar.setBackground(new java.awt.Color(33, 40, 42));
+        SideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/lista2.PNG"))); // NOI18N
+        lista.setText("jLabel2");
+        lista.setMaximumSize(new java.awt.Dimension(40, 40));
+        lista.setMinimumSize(new java.awt.Dimension(40, 40));
+        SideBar.add(lista, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 50, 50));
+
+        favoritos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/historial.PNG"))); // NOI18N
+        favoritos.setText("jLabel2");
+        favoritos.setMaximumSize(new java.awt.Dimension(40, 40));
+        favoritos.setMinimumSize(new java.awt.Dimension(40, 40));
+        SideBar.add(favoritos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 50, 50));
+
+        buscador1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/buscador.PNG"))); // NOI18N
+        buscador1.setText("buscador");
+        buscador1.setMaximumSize(new java.awt.Dimension(40, 40));
+        buscador1.setMinimumSize(new java.awt.Dimension(40, 40));
+        SideBar.add(buscador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 50, 50));
+
+        jButton1.setBackground(new java.awt.Color(33, 40, 42));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/profile.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        botonCreditos.setBackground(new java.awt.Color(139, 195, 73));
+        botonCreditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/iconoCredito.png"))); // NOI18N
+        botonCreditos.setBorderPainted(false);
+        botonCreditos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCreditosActionPerformed(evt);
+            }
+        });
+        SideBar.add(botonCreditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 70, 60));
+
+        jPanel6.setBackground(new java.awt.Color(139, 195, 73));
+
+        nCreditos1.setBackground(new java.awt.Color(139, 195, 73));
+        nCreditos1.setText("Creditos:");
+        nCreditos1.setToolTipText("");
+        nCreditos1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        nCreditos1.setInheritsPopupMenu(false);
+
+        nCreditos.setBackground(new java.awt.Color(139, 195, 73));
+        nCreditos.setText("n");
+        nCreditos.setToolTipText("");
+        nCreditos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        nCreditos.setInheritsPopupMenu(false);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nCreditos1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addComponent(nCreditos1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        SideBar.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 70, 50));
+
+        Panel_General.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 100, 1070));
+
         Raya_verde1.setBackground(new java.awt.Color(139, 195, 73));
 
         javax.swing.GroupLayout Raya_verde1Layout = new javax.swing.GroupLayout(Raya_verde1);
@@ -111,35 +453,6 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         );
 
         Panel_General.add(Raya_verde1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 1, -1));
-
-        SideBar.setBackground(new java.awt.Color(33, 40, 42));
-        SideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        perfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/profile.png"))); // NOI18N
-        perfil.setText("jLabel2");
-        perfil.setMaximumSize(new java.awt.Dimension(40, 40));
-        perfil.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(perfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 50, 50));
-
-        lista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/lista2.PNG"))); // NOI18N
-        lista.setText("jLabel2");
-        lista.setMaximumSize(new java.awt.Dimension(40, 40));
-        lista.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(lista, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 50, 50));
-
-        favoritos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/historial.PNG"))); // NOI18N
-        favoritos.setText("jLabel2");
-        favoritos.setMaximumSize(new java.awt.Dimension(40, 40));
-        favoritos.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(favoritos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 50, 50));
-
-        buscador1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/buscador.PNG"))); // NOI18N
-        buscador1.setText("buscador");
-        buscador1.setMaximumSize(new java.awt.Dimension(40, 40));
-        buscador1.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(buscador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 50, 50));
-
-        Panel_General.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 100, 1070));
 
         filtro.setBackground(new java.awt.Color(139, 195, 73));
 
@@ -711,6 +1024,116 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void botonCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCreditosActionPerformed
+        
+        
+        if(entrado == true){
+            entrado = false;
+            panelCreditos.setVisible(true);
+        } else { 
+            panelCreditos.setVisible(false);
+            entrado = true; 
+        }
+        
+    }//GEN-LAST:event_botonCreditosActionPerformed
+
+    private void boton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton100ActionPerformed
+       inputDinero.setText("100");
+    }//GEN-LAST:event_boton100ActionPerformed
+
+    private void transferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferenciaActionPerformed
+        
+        String textoInputDinero = inputDinero.getText();
+        int valorDinero = Integer.parseInt(textoInputDinero);
+        
+        if (valorDinero % 10 == 0) {
+            
+            try {
+                String sql = "UPDATE USUARIOS SET creditos = ? WHERE id = ?";
+
+                PreparedStatement statement = BD.makeConnection().prepareStatement(sql);
+
+            // Define el valor que deseas actualizar usando la variable
+                 statement.setInt(1, creditos+(valorDinero/10));
+                 statement.setInt(2, BD.comprobarUsuario().getId());
+
+            // Ejecuta la actualización
+                int filasActualizadas = statement.executeUpdate();
+
+                if (filasActualizadas > 0) {
+                    System.out.println("Actualización exitosa. Filas actualizadas: " + filasActualizadas);
+                    panelTransRealizada.setVisible(true);
+                    transferencia.setVisible(false);
+                    boton100.setVisible(false);
+                    boton30.setVisible(false);
+                    boton50.setVisible(false);
+                    boton10.setVisible(false);
+                    creditos += valorDinero/10;
+                    nCreditos.setText(String.valueOf(creditos));
+
+                } else {
+                    System.out.println("Ninguna fila fue actualizada.");
+            }   
+            } catch (SQLException e) {e.printStackTrace();}
+
+     
+        } else {
+            
+            panelNoPosible.setVisible(true);
+            transferencia.setVisible(false);
+            boton100.setVisible(false);
+            boton30.setVisible(false);
+            boton50.setVisible(false);
+            boton10.setVisible(false);
+
+        }
+        
+    }//GEN-LAST:event_transferenciaActionPerformed
+
+    private void boton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton30ActionPerformed
+       inputDinero.setText("30");
+    }//GEN-LAST:event_boton30ActionPerformed
+
+    private void boton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton50ActionPerformed
+       inputDinero.setText("50");
+    }//GEN-LAST:event_boton50ActionPerformed
+
+    private void boton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton10ActionPerformed
+       inputDinero.setText("10");
+    }//GEN-LAST:event_boton10ActionPerformed
+
+    private void inputDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDineroActionPerformed
+        
+    }//GEN-LAST:event_inputDineroActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        panelNoPosible.setVisible(false);
+        transferencia.setVisible(true);
+        boton100.setVisible(true);
+        boton30.setVisible(true);
+        boton50.setVisible(true);
+        boton10.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        panelTransRealizada.setVisible(false);
+        transferencia.setVisible(true);
+        boton100.setVisible(true);
+        boton30.setVisible(true);
+        boton50.setVisible(true);
+        boton10.setVisible(true);
+  
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -724,12 +1147,18 @@ public class PaginaPrincipal extends javax.swing.JFrame {
                 new PaginaPrincipal().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_General;
     private javax.swing.JPanel Raya_verde1;
     private javax.swing.JPanel SideBar;
+    private javax.swing.JButton boton10;
+    private javax.swing.JButton boton100;
+    private javax.swing.JButton boton30;
+    private javax.swing.JButton boton50;
+    private javax.swing.JButton botonCreditos;
     private javax.swing.JLabel buscador;
     private javax.swing.JLabel buscador1;
     private javax.swing.JLabel buscador2;
@@ -744,6 +1173,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel favoritos;
     private javax.swing.JPanel filtro;
     private javax.swing.JPanel imagen;
+    private javax.swing.JTextField inputDinero;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -754,9 +1188,16 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -768,10 +1209,13 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel lista;
+    private javax.swing.JLabel nCreditos;
+    private javax.swing.JLabel nCreditos1;
     private javax.swing.JLabel nombre_text;
     private javax.swing.JLabel nombre_text1;
     private javax.swing.JLabel nombre_text10;
@@ -788,8 +1232,13 @@ public class PaginaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel nombre_text7;
     private javax.swing.JLabel nombre_text8;
     private javax.swing.JLabel nombre_text9;
-    private javax.swing.JLabel perfil;
+    private javax.swing.JPanel panelCreditos;
+    private javax.swing.JPanel panelNoPosible;
+    private javax.swing.JPanel panelNoTransRealizada;
+    private javax.swing.JPanel panelTransRealizada;
     private javax.swing.JPanel registro;
     private javax.swing.JPanel registro1;
+    private javax.swing.JButton transferencia;
+    private javax.swing.JLabel txtIngresarDinero;
     // End of variables declaration//GEN-END:variables
 }

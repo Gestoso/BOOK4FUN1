@@ -24,8 +24,10 @@ public class Controlador {
     private static int telefono;
     private static String direccion;
     private static boolean found;
+        public String img;
+    public int creditos;
 
-    public Controlador(int id, String dni, String nombre, String apellido, String email, int telefono, String contrasenya, String direccion, boolean found) {
+    public Controlador(int id, String dni, String nombre, String apellido, String email, int telefono, String contrasenya, String direccion, boolean found, String img, int creditos) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
@@ -35,6 +37,20 @@ public class Controlador {
         this.contrasenya = contrasenya;
         this.direccion = direccion;
         this.found = found;
+        this.img = img;
+        this.creditos = creditos;
+    }
+    
+        public void setImg(String img) {
+        this.img = img;
+    }
+
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
+    }
+
+    public String getImg() {
+        return img;
     }
 
     public Controlador(boolean found) {
@@ -65,7 +81,11 @@ public class Controlador {
     public static int getTelefono() {
         return telefono;
     }
-
+    
+    public int getCreditos() {
+        return creditos;
+    }
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -140,7 +160,10 @@ public class Controlador {
     userData.put("telefono", telefono);
     userData.put("contrasenya", contrasenya);
     userData.put("direccion", direccion);
-    userData.put("found", found);
+    userData.put("creditos", creditos);
+    userData.put("frData.put(\"creditos\", creditos);ound", found);
     return userData;
 }
 }
+
+
