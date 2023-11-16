@@ -552,7 +552,7 @@ public class CreacionAlquiler extends javax.swing.JFrame {
 
         registro.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 1510, 610));
 
-        Panel_General.add(registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 190, 1930, 890));
+        Panel_General.add(registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 190, 1950, 890));
 
         imagen.setBackground(new java.awt.Color(33, 40, 42));
         imagen.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -560,7 +560,7 @@ public class CreacionAlquiler extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/Logo BOOK4U.png"))); // NOI18N
         imagen.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, 950, 220));
 
-        Panel_General.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 2, 1930, 190));
+        Panel_General.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 2, 1940, 190));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -804,8 +804,6 @@ public class CreacionAlquiler extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
