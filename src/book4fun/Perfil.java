@@ -4,6 +4,8 @@
  */
 package book4fun;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author gesto
@@ -14,7 +16,18 @@ public class Perfil extends javax.swing.JFrame {
      * Creates new form Perfil
      */
     public Perfil() {
+        
+                Login login = new Login();
+        login.setUsuario();
+        Usuario usu = login.getUsuario();
+        Nombre.setText(usu.nombre);
+        Apellido.setText(usu.apellido);
+        dni.setText(usu.dni);
+        email.setText(usu.email);
+        direccion.setText(usu.direccion);
+        telefono.setText(usu.telefono);
         initComponents();
+        
     }
 
     /**
@@ -29,6 +42,21 @@ public class Perfil extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        Imagen = new javax.swing.JLabel();
+        Nombre = new javax.swing.JLabel();
+        Apellido = new javax.swing.JLabel();
+        nombre_text = new javax.swing.JLabel();
+        nombre_text1 = new javax.swing.JLabel();
+        nombre_text2 = new javax.swing.JLabel();
+        nombre_text3 = new javax.swing.JLabel();
+        nombre_text4 = new javax.swing.JLabel();
+        nombre_text5 = new javax.swing.JLabel();
+        nombre_text6 = new javax.swing.JLabel();
+        dni = new javax.swing.JLabel();
+        direccion = new javax.swing.JLabel();
+        email = new javax.swing.JLabel();
+        telefono = new javax.swing.JLabel();
+        creditos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1930, 1080));
@@ -37,7 +65,7 @@ public class Perfil extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(1930, 1080));
         jPanel1.setPreferredSize(new java.awt.Dimension(1930, 1080));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 190, 200));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 190, 200));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(33, 40, 42));
@@ -51,6 +79,51 @@ public class Perfil extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, 200, 120));
+        jPanel1.add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, -1, -1));
+
+        Nombre.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
+        jPanel1.add(Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, -1, -1));
+
+        nombre_text.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text.setForeground(new java.awt.Color(255, 255, 255));
+        nombre_text.setText("Nombre:");
+        jPanel1.add(nombre_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, 160, -1));
+
+        nombre_text1.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text1.setForeground(new java.awt.Color(255, 255, 255));
+        nombre_text1.setText("Créditos:");
+        jPanel1.add(nombre_text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, 90, -1));
+
+        nombre_text2.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text2.setForeground(new java.awt.Color(255, 255, 255));
+        nombre_text2.setText("Apellido:");
+        jPanel1.add(nombre_text2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 130, -1));
+
+        nombre_text3.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text3.setForeground(new java.awt.Color(255, 255, 255));
+        nombre_text3.setText("DNI:");
+        jPanel1.add(nombre_text3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 90, -1));
+
+        nombre_text4.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text4.setForeground(new java.awt.Color(255, 255, 255));
+        nombre_text4.setText("Dirección:");
+        jPanel1.add(nombre_text4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 90, -1));
+
+        nombre_text5.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text5.setForeground(new java.awt.Color(255, 255, 255));
+        nombre_text5.setText("Email:");
+        jPanel1.add(nombre_text5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 80, -1));
+
+        nombre_text6.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text6.setForeground(new java.awt.Color(255, 255, 255));
+        nombre_text6.setText("Teléfono:");
+        jPanel1.add(nombre_text6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, 70, -1));
+        jPanel1.add(dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, -1, -1));
+        jPanel1.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, -1, -1));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, -1, -1));
+        jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, -1, -1));
+        jPanel1.add(creditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 490, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,7 +138,7 @@ public class Perfil extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -106,8 +179,23 @@ public class Perfil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Apellido;
+    private javax.swing.JLabel Imagen;
+    private javax.swing.JLabel Nombre;
+    private javax.swing.JLabel creditos;
+    private javax.swing.JLabel direccion;
+    private javax.swing.JLabel dni;
+    private javax.swing.JLabel email;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel nombre_text;
+    private javax.swing.JLabel nombre_text1;
+    private javax.swing.JLabel nombre_text2;
+    private javax.swing.JLabel nombre_text3;
+    private javax.swing.JLabel nombre_text4;
+    private javax.swing.JLabel nombre_text5;
+    private javax.swing.JLabel nombre_text6;
+    private javax.swing.JLabel telefono;
     // End of variables declaration//GEN-END:variables
 }

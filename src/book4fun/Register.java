@@ -341,7 +341,7 @@ public class Register extends javax.swing.JFrame {
                     campos = false;
         }
         if(telefono_field.getText().length() == 9){
-            Controlador.setTelefono(Integer.parseInt(telefono_field.getText()));
+            Controlador.setTelefono(telefono_field.getText());
         } else {
             String dnimal = "El campo Telefono debe tener 9 carácteres.";
             jTextField2.setText(dnimal);
@@ -367,7 +367,7 @@ public class Register extends javax.swing.JFrame {
         
         if (campos) {
             
-            Usuario usu = BD.insertaUsuario(BD.makeConnection(), Controlador.getDNI(), Controlador.getNombre(), Controlador.getApellido(),Controlador.getEmail(), Controlador.getTelefono(),Controlador.getContrasenya(), Controlador.getDireccion());
+            Usuario usu = BD.insertaUsuario(BD.makeConnection(), Controlador.getDNI(), Controlador.getNombre(), Controlador.getApellido(),Controlador.getEmail(), Controlador.getTelefono(),Controlador.getContrasenya(), Controlador.getDireccion(), 0);
         if (usu == null) {
             
             System.out.println("No se inserto el usuario");

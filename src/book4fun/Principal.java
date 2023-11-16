@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import book4fun.Usuario;
+import java.awt.Image;
+import java.io.IOException;
 import java.net.URL;
 import javax.swing.JButton;
 /**
@@ -20,18 +22,22 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Register
      */
     public Principal() {
+        Login login = new Login();
+        login.setUsuario();
+        Usuario usu = login.getUsuario();
+        ImageIcon icono = obtenerIconoDesdeEnlace(usu.img);
         initComponents();
+        perfilBut.setIcon(icono);
+        System.out.println("Usuario: " + usu.nombre);
     }
-    public static void icono() {
         
                 Usuario usu = BD.comprobarUsuario();
 
-      ImageIcon icon = new ImageIcon(new URL(usu.getImgURL()));
+  //    ImageIcon icon = new ImageIcon(new URL(usu.getImgURL()));
 
 // Crea un botón y establece el icono
-JButton perfil = new JButton();
-perfil.setIcon(icon);
-    }
+//perfil.setIcon(icon);
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,7 +54,7 @@ perfil.setIcon(icon);
         lista = new javax.swing.JLabel();
         favoritos = new javax.swing.JLabel();
         buscador1 = new javax.swing.JLabel();
-        perfil = new javax.swing.JButton();
+        perfilBut = new javax.swing.JButton();
         filtro = new javax.swing.JPanel();
         contra_field = new javax.swing.JTextField();
         contra_field1 = new javax.swing.JTextField();
@@ -147,17 +153,15 @@ perfil.setIcon(icon);
         buscador1.setMinimumSize(new java.awt.Dimension(40, 40));
         SideBar.add(buscador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 50, 50));
 
-        perfil.setForeground(new java.awt.Color(255, 255, 255));
-        perfil.setIcon(icon);
-        perfil.setBorder(null);
-        perfil.addActionListener(new java.awt.event.ActionListener() {
+        perfilBut.setText("jButton1");
+        perfilBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                perfilActionPerformed(evt);
+                perfilButActionPerformed(evt);
             }
         });
-        SideBar.add(perfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 70, 60));
+        SideBar.add(perfilBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        Panel_General.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 100, 1070));
+        Panel_General.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 160, 1070));
 
         filtro.setBackground(new java.awt.Color(139, 195, 73));
 
@@ -730,13 +734,12 @@ perfil.setIcon(icon);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilActionPerformed
-
-        Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
+    private void perfilButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilButActionPerformed
+Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
     Frame.setVisible(true); // Hace visible el JFrame "Register"
     this.dispose();
 
-    }//GEN-LAST:event_perfilActionPerformed
+    }//GEN-LAST:event_perfilButActionPerformed
     
     /**
      * @param args the command line arguments
@@ -750,6 +753,17 @@ perfil.setIcon(icon);
                 new Principal().setVisible(true);
             }
         });
+    }
+    
+    public static ImageIcon obtenerIconoDesdeEnlace(String img) {
+        try {
+            URL url = new URL(img);
+            Image imagen = ImageIO.read(url);
+            return new ImageIcon(imagen);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -814,7 +828,7 @@ perfil.setIcon(icon);
     private javax.swing.JLabel nombre_text7;
     private javax.swing.JLabel nombre_text8;
     private javax.swing.JLabel nombre_text9;
-    private javax.swing.JButton perfil;
+    private javax.swing.JButton perfilBut;
     private javax.swing.JPanel registro;
     private javax.swing.JPanel registro1;
     // End of variables declaration//GEN-END:variables

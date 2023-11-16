@@ -25,8 +25,10 @@ public class BD {
         String nombre = null;
         String apellido = null;
         String email = null;
-        int telefono = -1;
+        String telefono = null;
         String direccion = null;
+        String img = null;
+        int creditos = -1;
 
         String sql = "SELECT * FROM USUARIOS WHERE NOMBRE = ? AND CONTRASENYA = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -40,15 +42,17 @@ public class BD {
                 nombre = rs.getString("NOMBRE");
                 apellido = rs.getString("APELLIDO");
                 email = rs.getString("EMAIL");
-                telefono = rs.getInt("TELEFONO");
+                telefono = rs.getString("TELEFONO");
                 direccion = rs.getString("DIRECCION");
+                img = rs.getString("IMG");
+                creditos = rs.getInt("CREDITOS");
                 found = true;
             }
         } catch (SQLException e) {
             System.out.println("Error al comprobar el usuario: " + e);
         }
 
-        return new Controlador(id, dni, nombre, apellido, email, telefono, contrasenya, direccion, found);
+        return new Controlador(id, dni, nombre, apellido, email, telefono, contrasenya, direccion, found, img, creditos);
     }
    
 
@@ -87,19 +91,22 @@ try {
 
         }
     }
-    public static Usuario insertaUsuario(Connection conn, String dni, String nombre, String apellido, String email, int telefono, String contrasenya, String direccion) {
-    String sql = "INSERT INTO USUARIOS (ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, CONTRASENYA, DIRECCION, IMG) VALUES (IDUSU.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public static Usuario insertaUsuario(Connection conn, String dni, String nombre, String apellido, String email, String telefono, String contrasenya, String direccion, int creditos) {
+    String sql = "INSERT INTO USUARIOS (ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, CONTRASENYA, DIRECCION, IMG, CREDITOS) VALUES (IDUSU.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     String img = "https://imgur.com/sbFLV8b.png"; // URL directamente en la función
+    
     
     try (PreparedStatement preparedStatement = conn.prepareStatement(sql, new String[] { "ID" })) {
         preparedStatement.setString(1, dni);
         preparedStatement.setString(2, nombre);
         preparedStatement.setString(3, apellido);
         preparedStatement.setString(4, email);
-        preparedStatement.setInt(5, telefono);
+        preparedStatement.setString(5, telefono);
         preparedStatement.setString(6, contrasenya);
         preparedStatement.setString(7, direccion);
         preparedStatement.setString(8, img);
+                preparedStatement.setInt(8, creditos);
+
 System.out.println("Pasa");
         int filasAfectadas = preparedStatement.executeUpdate();
 
@@ -110,7 +117,7 @@ System.out.println("Pasa");
                 int id = generatedKeys.getInt(1);
                 System.out.println("ID del usuario insertado: " + id);
                 // Crea una instancia de Usuario con los datos insertados y el ID generado
-                Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, contrasenya, direccion, img);
+                Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, contrasenya, direccion, img, creditos);
                 return usuario;
             }
         } else {
@@ -124,7 +131,7 @@ System.out.println("Pasa");
 
     
 public static Usuario comprobarUsuario() {
-    String sql = "SELECT ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, DIRECCION FROM USUARIOS WHERE NOMBRE = ? AND CONTRASENYA = ?";
+    String sql = "SELECT ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, DIRECCION, IMG, CREDITOS FROM USUARIOS WHERE NOMBRE = ? AND CONTRASENYA = ?";
     
     Connection conn = makeConnection();
     PreparedStatement st = null;
@@ -142,11 +149,12 @@ public static Usuario comprobarUsuario() {
             String nombre = resultSet.getString("NOMBRE");
             String apellido = resultSet.getString("APELLIDO");
             String email = resultSet.getString("EMAIL");
-            int telefono = resultSet.getInt("TELEFONO");
+            String telefono = resultSet.getString("TELEFONO");
             String direccion = resultSet.getString("DIRECCION");
             String img = resultSet.getString("IMG");
-            
-            Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, Controlador.getContrasenya(), direccion, img);
+            int creditos = resultSet.getInt("CREDITOS");
+
+            Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, Controlador.getContrasenya(), direccion, img, creditos);
             return usuario;
         }
 

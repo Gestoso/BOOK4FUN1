@@ -11,16 +11,23 @@ import java.util.Map;
  * @author gesto
  */
 public class Login extends javax.swing.JFrame {
+        private Usuario usu;
 
     /**
      * Creates new form Register
      */
     public Login() {
-        
         initComponents();
         mensaje_error.setVisible(false);
+        
     }
-
+    public void setUsuario() {
+                usu = BD.comprobarUsuario(); 
+    }
+    
+public Usuario getUsuario() {
+        return usu;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -214,7 +221,7 @@ public class Login extends javax.swing.JFrame {
         Controlador.setUsuario(nombre_field.getText());
         Controlador.setContrasenya(contra_field.getText());
         System.out.println("Nombre: " + Controlador.getUsuario() + " Contra: " + Controlador.getContrasenya());
-        Usuario usu = BD.comprobarUsuario();
+        usu = BD.comprobarUsuario();
 
 if (usu != null) {
     System.out.println("Cheeeeeeeeck");
@@ -227,7 +234,7 @@ if (usu != null) {
 }
        
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     private void nombre_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombre_fieldActionPerformed

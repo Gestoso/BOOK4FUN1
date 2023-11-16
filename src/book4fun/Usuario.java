@@ -11,18 +11,35 @@ import javax.swing.ImageIcon;
  * @author gesto
  */
 public class Usuario {
-    private int id;
-    private String dni;
-    private String nombre;
-    private String apellido;
-    private String email;
-    private int telefono;
-    private String contrasenya;
-    private String direccion;
+    public int id;
+    public String dni;
+    public String nombre;
+    public String apellido;
+    public String email;
+    public String telefono;
+    public String contrasenya;
+    public String direccion;
     public String img;
+    public int creditos;
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public int getCreditos() {
+        return creditos;
+    }
 
     // Constructor
-    public Usuario(int id, String dni, String nombre, String apellido, String email, int telefono, String contrasenya, String direccion, String url) {
+    public Usuario(int id, String dni, String nombre, String apellido, String email, String telefono, String contrasenya, String direccion, String img, int creditos) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
@@ -32,6 +49,7 @@ public class Usuario {
         this.contrasenya = contrasenya;
         this.direccion = direccion;
         this.img = img;
+        this.creditos = this.creditos;
     }
 
     public String getImgURL() {
@@ -63,7 +81,7 @@ public class Usuario {
         return email;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
@@ -95,7 +113,7 @@ public class Usuario {
         this.email = email;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
