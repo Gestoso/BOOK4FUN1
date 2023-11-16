@@ -99,7 +99,7 @@ try {
     
     try (PreparedStatement preparedStatement = conn.prepareStatement(sql, new String[] { "ID" })) {
         preparedStatement.setString(1, dni);
-        preparedStatement.setString(2, nombre);
+        preparedStatement.setString(2, nombre); 
         preparedStatement.setString(3, apellido);
         preparedStatement.setString(4, email);
         preparedStatement.setInt(5, telefono);

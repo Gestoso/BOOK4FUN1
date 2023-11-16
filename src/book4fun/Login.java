@@ -170,19 +170,19 @@ public class Login extends javax.swing.JFrame {
         System.out.println("Nombre: " + Controlador.getUsuario() + " Contra: " + Controlador.getContrasenya());
         Controlador result = BD.comprobarUsuario(BD.makeConnection());
 
-if (result.isFound()) {
-  
-     dispose();
-        
-        // Crea una instancia del JFrame de PaginaPrincipal
-        PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
-        
-        // Muestra el JFrame de PaginaPrincipal
-        paginaPrincipal.setVisible(true);
-    
-} else {
-    System.out.println("Inicio de sesión fallido. Verifica tus credenciales.");
-}
+        if (result.isFound()) {
+
+             dispose();
+
+                // Crea una instancia del JFrame de PaginaPrincipal
+                PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+
+                // Muestra el JFrame de PaginaPrincipal
+                paginaPrincipal.setVisible(true);
+
+        } else {
+            System.out.println("Inicio de sesión fallido. Verifica tus credenciales.");
+        }
        
     }//GEN-LAST:event_jButton1ActionPerformed
     
