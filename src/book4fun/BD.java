@@ -10,11 +10,13 @@ import java.sql.PreparedStatement;
  *
  * @author gesto
  */
+//jdbc:oracle:thin:@oracle.ilerna.com:1521:XE  
+//jdbc:oracle:thin:@192.168.3.26:1521:XE
 public class BD {
  private static String USER = "23_24_DAM2_CLECOTEAM";
     private static String PWD = "123456";
     private static String URL = "jdbc:oracle:thin:@192.168.3.26:1521:XE";
-
+    public static Usuario usuario;
     public static Controlador comprobarUsuario(Connection conn) {
         String nombreUsuario = Controlador.getUsuario();
         String contrasenya = Controlador.getContrasenya();
@@ -105,7 +107,7 @@ try {
         preparedStatement.setString(6, contrasenya);
         preparedStatement.setString(7, direccion);
         preparedStatement.setString(8, img);
-                preparedStatement.setInt(8, creditos);
+        preparedStatement.setInt(8, creditos);
 
 System.out.println("Pasa");
         int filasAfectadas = preparedStatement.executeUpdate();
@@ -154,7 +156,7 @@ public static Usuario comprobarUsuario() {
             String img = resultSet.getString("IMG");
             int creditos = resultSet.getInt("CREDITOS");
 
-            Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, Controlador.getContrasenya(), direccion, img, creditos);
+            usuario = new Usuario(id, dni, nombre, apellido, email, telefono, Controlador.getContrasenya(), direccion, img, creditos);
             return usuario;
         }
 

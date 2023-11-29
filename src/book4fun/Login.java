@@ -11,7 +11,7 @@ import java.util.Map;
  * @author gesto
  */
 public class Login extends javax.swing.JFrame {
-        private Usuario usu;
+        public Usuario usu;
 
     /**
      * Creates new form Register
@@ -39,6 +39,8 @@ public Usuario getUsuario() {
 
         Panel_General = new javax.swing.JPanel();
         Raya_verde = new javax.swing.JPanel();
+        imagen = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         registro = new javax.swing.JPanel();
         registro_text = new javax.swing.JLabel();
         nombre_text = new javax.swing.JLabel();
@@ -52,8 +54,6 @@ public Usuario getUsuario() {
         jTextField2 = new javax.swing.JTextField();
         boton_error = new javax.swing.JButton();
         contra_field = new javax.swing.JPasswordField();
-        imagen = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +73,14 @@ public Usuario getUsuario() {
         );
 
         Panel_General.add(Raya_verde, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 1930, 10));
+
+        imagen.setBackground(new java.awt.Color(33, 40, 42));
+        imagen.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/Logo BOOK4U.png"))); // NOI18N
+        imagen.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, 950, 220));
+
+        Panel_General.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 2, 1930, 190));
 
         registro.setBackground(new java.awt.Color(33, 40, 42));
         registro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -191,14 +199,6 @@ public Usuario getUsuario() {
 
         Panel_General.add(registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 1930, 890));
 
-        imagen.setBackground(new java.awt.Color(33, 40, 42));
-        imagen.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/Logo BOOK4U.png"))); // NOI18N
-        imagen.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, 950, 220));
-
-        Panel_General.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 2, 1930, 190));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -222,6 +222,7 @@ public Usuario getUsuario() {
         Controlador.setContrasenya(contra_field.getText());
         System.out.println("Nombre: " + Controlador.getUsuario() + " Contra: " + Controlador.getContrasenya());
         usu = BD.comprobarUsuario();
+        System.out.println(usu.creditos);
 
 if (usu != null) {
     System.out.println("Cheeeeeeeeck");
