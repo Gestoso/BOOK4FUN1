@@ -466,7 +466,7 @@ public class CreacionAlquiler extends javax.swing.JFrame {
         jPanel11.add(tipoAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 350, 220, -1));
 
         precioAlquilerDia.setText("jTextField1");
-        jPanel11.add(precioAlquilerDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, 310, 40));
+        jPanel11.add(precioAlquilerDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, 310, 40));
 
         direccionAlquiler.setText("jTextField1");
         jPanel11.add(direccionAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 220, 30));
@@ -539,7 +539,7 @@ public class CreacionAlquiler extends javax.swing.JFrame {
                 crearAlquilerActionPerformed(evt);
             }
         });
-        jPanel11.add(crearAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, 300, 90));
+        jPanel11.add(crearAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 300, 90));
 
         jLabel16.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel16.setText("Baños:");
