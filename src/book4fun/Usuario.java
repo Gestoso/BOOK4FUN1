@@ -49,7 +49,7 @@ public class Usuario {
         this.contrasenya = contrasenya;
         this.direccion = direccion;
         this.img = img;
-        this.creditos = this.creditos;
+        this.creditos = creditos;
     }
 
     public String getImgURL() {
