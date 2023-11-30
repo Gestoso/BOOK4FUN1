@@ -804,6 +804,8 @@ contraedit.addMouseListener(new MouseAdapter() {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         guardarDatos(usu);
+                paneleditar.setVisible(false);
+
     }//GEN-LAST:event_guardarActionPerformed
 
     private void contraeditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraeditActionPerformed

@@ -52,7 +52,7 @@ public class Historial extends javax.swing.JFrame {
         initComponents();
         perfilBut.setIcon(icono);
 
-        creditos = BD.comprobarUsuario().getCreditos();
+        creditos = BD.comprobarUsuarioObj().getCreditos();
         nCreditos.setText(String.valueOf(creditos));
 
         panelCreditos.setVisible(false);
@@ -90,7 +90,7 @@ public class Historial extends javax.swing.JFrame {
 
                 int idVivienda = resultSet.getInt("ID");
                 
-                if(viviendasReservadas.contains(idVivienda) && usuarioReservadas.contains(BD.comprobarUsuario().getId())){
+                if(viviendasReservadas.contains(idVivienda) && usuarioReservadas.contains(BD.comprobarUsuarioObj().getId())){
                 
                      JPanel m = modeloPanel( idVivienda, resultSet.getString("NOMBRE"),
                                resultSet.getString("DIRECCION"), resultSet.getString("LOCALIZACION"),
@@ -274,7 +274,7 @@ public class Historial extends javax.swing.JFrame {
 
                 try (PreparedStatement statement = conn.prepareStatement(sql)) {
                     statement.setInt(1, id);
-                    statement.setInt(2, BD.comprobarUsuario().getId());
+                    statement.setInt(2, BD.comprobarUsuarioObj().getId());
 
                     try (ResultSet resultSet = statement.executeQuery()) {
                         if (resultSet.next()) {
@@ -340,7 +340,7 @@ public class Historial extends javax.swing.JFrame {
 
                     try (PreparedStatement statement = conn.prepareStatement(sql)) {
                         statement.setInt(1, id); // Asigna el valor del ID de la vivienda
-                        statement.setInt(2, BD.comprobarUsuario().getId());
+                        statement.setInt(2, BD.comprobarUsuarioObj().getId());
                         try (ResultSet resultSet = statement.executeQuery()) {
                             while (resultSet.next()) {
                                 Date fechaEntradaSql = resultSet.getDate("FECHA_ENTRADA");
@@ -457,7 +457,7 @@ public class Historial extends javax.swing.JFrame {
                                         java.sql.Date fechaSalida = new java.sql.Date(fechaSalidaUtil.getTime());
 
                                         statement.setInt(1, id);
-                                        statement.setInt(2, BD.comprobarUsuario().getId());
+                                        statement.setInt(2, BD.comprobarUsuarioObj().getId());
                                         statement.setDate(3, fechaEntrada);
                                         statement.setDate(4, fechaSalida);
                                         statement.setInt(5, totalc);
@@ -481,7 +481,7 @@ public class Historial extends javax.swing.JFrame {
                                         creditos -= totalc;
 
                                         statement.setInt(1, creditos);
-                                        statement.setInt(2, BD.comprobarUsuario().getId());
+                                        statement.setInt(2, BD.comprobarUsuarioObj().getId());
 
                                         // Ejecuta la actualización
                                         int filasActualizadas = statement.executeUpdate();
@@ -1068,7 +1068,7 @@ Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
 
                 // Define el valor que deseas actualizar usando la variable
                 statement.setInt(1, creditos+(valorDinero/10));
-                statement.setInt(2, BD.comprobarUsuario().getId());
+                statement.setInt(2, BD.comprobarUsuarioObj().getId());
 
                 // Ejecuta la actualización
                 int filasActualizadas = statement.executeUpdate();

@@ -13,8 +13,8 @@ import java.sql.PreparedStatement;
 public class BD {
  private static String USER = "23_24_DAM2_CLECOTEAM";
     private static String PWD = "123456";
-    private static String URL = "jdbc:oracle:thin:@oracle.ilerna.com:1521:XE";//jdbc:oracle:thin:@oracle.ilerna.com:1521:XE || jdbc:oracle:thin:@192.168.3.26:1521:XE
-
+    private static String URL = "jdbc:oracle:thin:@192.168.3.26:1521:XE";
+    public static Usuario usuario;
     public static Controlador comprobarUsuario(Connection conn) {
         String nombreUsuario = Controlador.getUsuario();
         String contrasenya = Controlador.getContrasenya();
@@ -62,10 +62,10 @@ public class BD {
 
         Connection conn = null;
 try {
-    
+   
     Class.forName("oracle.jdbc.driver.OracleDriver");
     conn = DriverManager.getConnection(URL, USER, PWD);
-    
+   
     System.out.println("Connection established!");
         } catch (SQLException e) {
             throw new IllegalStateException("Cannot connect the database! ", e);
@@ -77,10 +77,10 @@ try {
         return conn;
     }
 /**
- * 
- * @param conn 
+ *
+ * @param conn
  */
-        
+       
     public static void closeConnection(Connection conn) {
         //cierra la conexión
         try {
@@ -94,8 +94,8 @@ try {
     public static Usuario insertaUsuario(Connection conn, String dni, String nombre, String apellido, String email, String telefono, String contrasenya, String direccion, int creditos) {
     String sql = "INSERT INTO USUARIOS (ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, CONTRASENYA, DIRECCION, IMG, CREDITOS) VALUES (IDUSU.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     String img = "https://imgur.com/sbFLV8b.png"; // URL directamente en la función
-    
-    
+   
+   
     try (PreparedStatement preparedStatement = conn.prepareStatement(sql, new String[] { "ID" })) {
         preparedStatement.setString(1, dni);
         preparedStatement.setString(2, nombre);
@@ -105,7 +105,7 @@ try {
         preparedStatement.setString(6, contrasenya);
         preparedStatement.setString(7, direccion);
         preparedStatement.setString(8, img);
-                preparedStatement.setInt(8, creditos);
+        preparedStatement.setInt(8, creditos);
 
 System.out.println("Pasa");
         int filasAfectadas = preparedStatement.executeUpdate();
@@ -129,10 +129,10 @@ System.out.println("Pasa");
     return null;
 }
 
-    
+   
 public static Usuario comprobarUsuarioObj() {
     String sql = "SELECT ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, DIRECCION, IMG, CREDITOS FROM USUARIOS WHERE NOMBRE = ? AND CONTRASENYA = ?";
-    
+   
     Connection conn = makeConnection();
     PreparedStatement st = null;
     ResultSet resultSet = null;
@@ -154,7 +154,7 @@ public static Usuario comprobarUsuarioObj() {
             String img = resultSet.getString("IMG");
             int creditos = resultSet.getInt("CREDITOS");
 
-            Usuario usuario = new Usuario(id, dni, nombre, apellido, email, telefono, Controlador.getContrasenya(), direccion, img, creditos);
+            usuario = new Usuario(id, dni, nombre, apellido, email, telefono, Controlador.getContrasenya(), direccion, img, creditos);
             return usuario;
         }
 
@@ -187,6 +187,7 @@ public static Usuario comprobarUsuarioObj() {
 
     return null;
 }
+
  public static Usuario guardarDatos(Connection conn, int id, String nombre, String apellido, String dni, String direccion, String email, String telefono, String contrasenya) {
         String sql = "UPDATE USUARIOS SET nombre = ?, apellido = ?, dni = ?, direccion = ?, email = ?, telefono = ?, contrasenya = ? WHERE id = ?";
 
