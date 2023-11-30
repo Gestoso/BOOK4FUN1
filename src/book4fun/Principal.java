@@ -1054,7 +1054,7 @@ public class Principal extends javax.swing.JFrame {
                 perfilButActionPerformed(evt);
             }
         });
-        SideBar.add(perfilBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 720, -1, -1));
+        SideBar.add(perfilBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 720, -1, -1));
 
         botonCreditos.setBackground(new java.awt.Color(139, 195, 73));
         botonCreditos.setBorderPainted(false);
@@ -1100,29 +1100,32 @@ public class Principal extends javax.swing.JFrame {
 
         SideBar.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 70, 50));
 
+        jButton1.setBackground(new java.awt.Color(139, 195, 73));
         jButton1.setText("Historial");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, -1, -1));
+        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, -1, -1));
 
+        jButton5.setBackground(new java.awt.Color(139, 195, 73));
         jButton5.setText("Reservas");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        SideBar.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 660, -1, -1));
+        SideBar.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, -1, -1));
 
+        jButton6.setBackground(new java.awt.Color(139, 195, 73));
         jButton6.setText("Crear Alquiler");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        SideBar.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, -1, -1));
+        SideBar.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, -1, -1));
 
         Panel_General.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 120, 1070));
 

@@ -334,16 +334,19 @@ contraedit.addMouseListener(new MouseAdapter() {
         setMinimumSize(new java.awt.Dimension(1930, 1080));
 
         jPanel1.setBackground(new java.awt.Color(33, 40, 42));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 4));
         jPanel1.setMinimumSize(new java.awt.Dimension(1930, 1080));
         jPanel1.setPreferredSize(new java.awt.Dimension(1930, 1080));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        paneleditar.setBackground(new java.awt.Color(255, 255, 255));
-        paneleditar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        paneleditar.setBackground(new java.awt.Color(139, 195, 73));
+        paneleditar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 3));
         paneleditar.setForeground(new java.awt.Color(153, 153, 153));
         paneleditar.setEnabled(false);
 
+        nombreedit.setBackground(new java.awt.Color(0, 0, 0));
         nombreedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nombreedit.setForeground(new java.awt.Color(255, 255, 255));
         nombreedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nombreedit.setText("Nuevo Nombre");
         nombreedit.addActionListener(new java.awt.event.ActionListener() {
@@ -352,23 +355,27 @@ contraedit.addMouseListener(new MouseAdapter() {
             }
         });
 
-        guardar.setBackground(new java.awt.Color(153, 255, 102));
+        guardar.setBackground(new java.awt.Color(139, 195, 73));
         guardar.setText("Guardar");
+        guardar.setBorder(javax.swing.BorderFactory.createLineBorder(javax.swing.UIManager.getDefaults().getColor("Actions.Green")));
         guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarActionPerformed(evt);
             }
         });
 
-        cancelar.setBackground(new java.awt.Color(153, 255, 102));
+        cancelar.setBackground(new java.awt.Color(139, 195, 73));
         cancelar.setText("Cancelar");
+        cancelar.setBorder(javax.swing.BorderFactory.createLineBorder(javax.swing.UIManager.getDefaults().getColor("Actions.Green")));
         cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarActionPerformed(evt);
             }
         });
 
+        apellidoedit.setBackground(new java.awt.Color(0, 0, 0));
         apellidoedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        apellidoedit.setForeground(new java.awt.Color(204, 204, 204));
         apellidoedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         apellidoedit.setText("Nuevo Apellido");
         apellidoedit.addActionListener(new java.awt.event.ActionListener() {
@@ -377,7 +384,9 @@ contraedit.addMouseListener(new MouseAdapter() {
             }
         });
 
+        dniedit.setBackground(new java.awt.Color(0, 0, 0));
         dniedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dniedit.setForeground(new java.awt.Color(204, 204, 204));
         dniedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         dniedit.setText("Nuevo DNI");
         dniedit.addActionListener(new java.awt.event.ActionListener() {
@@ -386,7 +395,9 @@ contraedit.addMouseListener(new MouseAdapter() {
             }
         });
 
+        direccionedit.setBackground(new java.awt.Color(0, 0, 0));
         direccionedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        direccionedit.setForeground(new java.awt.Color(204, 204, 204));
         direccionedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         direccionedit.setText("Nueva Direccion");
         direccionedit.addActionListener(new java.awt.event.ActionListener() {
@@ -395,7 +406,9 @@ contraedit.addMouseListener(new MouseAdapter() {
             }
         });
 
+        emailedit.setBackground(new java.awt.Color(0, 0, 0));
         emailedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        emailedit.setForeground(new java.awt.Color(204, 204, 204));
         emailedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         emailedit.setText("Nuevo Email");
         emailedit.addActionListener(new java.awt.event.ActionListener() {
@@ -404,7 +417,9 @@ contraedit.addMouseListener(new MouseAdapter() {
             }
         });
 
+        telefonoedit.setBackground(new java.awt.Color(0, 0, 0));
         telefonoedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        telefonoedit.setForeground(new java.awt.Color(204, 204, 204));
         telefonoedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         telefonoedit.setText("Nuevo Telefono");
         telefonoedit.addActionListener(new java.awt.event.ActionListener() {
@@ -413,7 +428,9 @@ contraedit.addMouseListener(new MouseAdapter() {
             }
         });
 
+        contraedit.setBackground(new java.awt.Color(0, 0, 0));
         contraedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        contraedit.setForeground(new java.awt.Color(204, 204, 204));
         contraedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         contraedit.setText("Nueva Contraseña");
         contraedit.addActionListener(new java.awt.event.ActionListener() {
