@@ -33,7 +33,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         perfilBut.setIcon(icono);
         System.out.println("Usuario: " + usu.nombre);
-         creditos = BD.comprobarUsuario().getCreditos();
+         creditos = BD.comprobarUsuarioObj().getCreditos();
         nCreditos.setText(String.valueOf(creditos));
 
         panelCreditos.setVisible(false);
@@ -42,7 +42,7 @@ public class Principal extends javax.swing.JFrame {
         panelNoPosible.setVisible(false);
     }
         
-                Usuario usu = BD.comprobarUsuario();
+                Usuario usu = BD.comprobarUsuarioObj();
 
   //    ImageIcon icon = new ImageIcon(new URL(usu.getImgURL()));
 
@@ -1046,7 +1046,7 @@ Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
 
                 // Define el valor que deseas actualizar usando la variable
                 statement.setInt(1, creditos+(valorDinero/10));
-                statement.setInt(2, BD.comprobarUsuario().getId());
+                statement.setInt(2, BD.comprobarUsuarioObj().getId());
 
                 // Ejecuta la actualización
                 int filasActualizadas = statement.executeUpdate();

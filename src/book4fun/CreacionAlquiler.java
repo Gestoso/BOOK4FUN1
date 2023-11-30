@@ -23,7 +23,7 @@ public class CreacionAlquiler extends javax.swing.JFrame {
     public CreacionAlquiler() {
         initComponents();
         
-        creditos = BD.comprobarUsuario().getCreditos();
+        creditos = BD.comprobarUsuarioObj().getCreditos();
         nCreditos.setText(String.valueOf(creditos));
 
         panelCreditos.setVisible(false);
@@ -461,27 +461,27 @@ public class CreacionAlquiler extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel10.setText("Localizacion:");
         jPanel11.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 170, -1, -1));
-
-        tipoAlquiler.setText("jTextField1");
         jPanel11.add(tipoAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 350, 220, -1));
 
-        precioAlquilerDia.setText("jTextField1");
-        jPanel11.add(precioAlquilerDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, 310, 40));
-
-        direccionAlquiler.setText("jTextField1");
+        precioAlquilerDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precioAlquilerDiaActionPerformed(evt);
+            }
+        });
+        jPanel11.add(precioAlquilerDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 460, 310, 40));
         jPanel11.add(direccionAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 220, 30));
 
-        nombreDueñoAlquiler.setText("jTextField1");
+        nombreDueñoAlquiler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreDueñoAlquilerActionPerformed(evt);
+            }
+        });
         jPanel11.add(nombreDueñoAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 140, 220, -1));
-
-        localizacionAlquiler.setText("jTextField1");
         jPanel11.add(localizacionAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 170, 220, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel9.setText("Metros cuadrados:");
         jPanel11.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 200, -1, -1));
-
-        metrosAlquiler.setText("jTextField1");
         jPanel11.add(metrosAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 200, 220, -1));
 
         jLabel11.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -495,8 +495,6 @@ public class CreacionAlquiler extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel13.setText("Habitaciones:");
         jPanel11.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 290, -1, -1));
-
-        habitacionesAlquiler.setText("jTextField1");
         jPanel11.add(habitacionesAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 290, 220, -1));
 
         jLabel14.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
@@ -506,8 +504,6 @@ public class CreacionAlquiler extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         jLabel15.setText("Nombre ubicacion: ");
         jPanel11.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, -1, -1));
-
-        nombreAlquiler.setText("jTextField1");
         jPanel11.add(nombreAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 60, 310, 40));
 
         jLabel17.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -539,13 +535,11 @@ public class CreacionAlquiler extends javax.swing.JFrame {
                 crearAlquilerActionPerformed(evt);
             }
         });
-        jPanel11.add(crearAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, 300, 90));
+        jPanel11.add(crearAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 490, 300, 90));
 
         jLabel16.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel16.setText("Baños:");
         jPanel11.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 320, -1, -1));
-
-        bañosAlquiler.setText("jTextField1");
         jPanel11.add(bañosAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 320, 220, -1));
         jPanel11.add(wifiAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 260, -1, -1));
         jPanel11.add(piscinaAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 230, -1, -1));
@@ -615,7 +609,7 @@ public class CreacionAlquiler extends javax.swing.JFrame {
 
             // Define el valor que deseas actualizar usando la variable
                  statement.setInt(1, creditos+(valorDinero/10));
-                 statement.setInt(2, BD.comprobarUsuario().getId());
+                 statement.setInt(2, BD.comprobarUsuarioObj().getId());
 
             // Ejecuta la actualización
                 int filasActualizadas = statement.executeUpdate();
@@ -706,7 +700,7 @@ public class CreacionAlquiler extends javax.swing.JFrame {
             String sql = "INSERT INTO VIVIENDA (ID ,ID_USUARIO, NOMBRE, DIRECCION, LOCALIZACION, TIPO, M2, PISCINA, WIFI, HABITACIONES, BAÑOS, PRECIO_DIA) VALUES (ID_VIVIENDA.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (Connection conn = BD.makeConnection();
                  PreparedStatement statement = conn.prepareStatement(sql)) {
-                statement.setInt(1, BD.comprobarUsuario().getId()); // Reemplaza con el valor correcto para ID_USUARIO
+                statement.setInt(1, BD.comprobarUsuarioObj().getId()); // Reemplaza con el valor correcto para ID_USUARIO
                 statement.setString(2, nombreAlquiler.getText()); // Reemplaza con el valor correcto para NOMBRE
                 statement.setString(3, direccionAlquiler.getText()); // Reemplaza con el valor correcto para DIRECCION
                 statement.setString(4, localizacionAlquiler.getText()); // Reemplaza con el valor correcto para LOCALIZACION
@@ -741,6 +735,14 @@ public class CreacionAlquiler extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void precioAlquilerDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioAlquilerDiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_precioAlquilerDiaActionPerformed
+
+    private void nombreDueñoAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreDueñoAlquilerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreDueñoAlquilerActionPerformed
     
     /**
      * @param args the command line arguments

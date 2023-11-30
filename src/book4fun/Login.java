@@ -22,7 +22,7 @@ public class Login extends javax.swing.JFrame {
         
     }
     public void setUsuario() {
-                usu = BD.comprobarUsuario(); 
+                usu = BD.comprobarUsuarioObj(); 
     }
     
 public Usuario getUsuario() {
@@ -221,7 +221,7 @@ public Usuario getUsuario() {
         Controlador.setUsuario(nombre_field.getText());
         Controlador.setContrasenya(contra_field.getText());
         System.out.println("Nombre: " + Controlador.getUsuario() + " Contra: " + Controlador.getContrasenya());
-        usu = BD.comprobarUsuario();
+        usu = BD.comprobarUsuarioObj();
 
 if (usu != null) {
     System.out.println("Cheeeeeeeeck");

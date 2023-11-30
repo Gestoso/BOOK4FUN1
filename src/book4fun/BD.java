@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
 public class BD {
  private static String USER = "23_24_DAM2_CLECOTEAM";
     private static String PWD = "123456";
-    private static String URL = "jdbc:oracle:thin:@192.168.3.26:1521:XE";
+    private static String URL = "jdbc:oracle:thin:@oracle.ilerna.com:1521:XE";//jdbc:oracle:thin:@oracle.ilerna.com:1521:XE || jdbc:oracle:thin:@192.168.3.26:1521:XE
 
     public static Controlador comprobarUsuario(Connection conn) {
         String nombreUsuario = Controlador.getUsuario();
@@ -130,7 +130,7 @@ System.out.println("Pasa");
 }
 
     
-public static Usuario comprobarUsuario() {
+public static Usuario comprobarUsuarioObj() {
     String sql = "SELECT ID, DNI, NOMBRE, APELLIDO, EMAIL, TELEFONO, DIRECCION, IMG, CREDITOS FROM USUARIOS WHERE NOMBRE = ? AND CONTRASENYA = ?";
     
     Connection conn = makeConnection();
@@ -187,4 +187,30 @@ public static Usuario comprobarUsuario() {
 
     return null;
 }
+ public static Usuario guardarDatos(Connection conn, int id, String nombre, String apellido, String dni, String direccion, String email, String telefono, String contrasenya) {
+        String sql = "UPDATE USUARIOS SET nombre = ?, apellido = ?, dni = ?, direccion = ?, email = ?, telefono = ?, contrasenya = ? WHERE id = ?";
+
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, nombre);
+            statement.setString(2, apellido);
+            statement.setString(3, dni);
+            statement.setString(4, direccion);
+            statement.setString(5, email);
+            statement.setString(6, telefono);
+            statement.setString(7, contrasenya);
+            statement.setInt(8, id);
+
+            int filasActualizadas = statement.executeUpdate();
+
+            if (filasActualizadas > 0) {
+                System.out.println("Datos actualizados exitosamente");
+            } else {
+                System.out.println("Error al actualizar los datos");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // Manejar la excepción de SQL aquí
+        }
+     return null;
+ }
 }

@@ -4,6 +4,10 @@
  */
 package book4fun;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 
 /**
@@ -11,7 +15,9 @@ import javax.swing.ImageIcon;
  * @author gesto
  */
 public class Perfil extends javax.swing.JFrame {
-
+public boolean entrado = true;
+    public int creditos;
+    public Usuario usu = null;
     /**
      * Creates new form Perfil
      */
@@ -19,17 +25,97 @@ public class Perfil extends javax.swing.JFrame {
         
                 Login login = new Login();
         login.setUsuario();
-        Usuario usu = login.getUsuario();
+         usu = BD.comprobarUsuarioObj();
+        //Usuario usu = login.getUsuario();
+        initComponents();
+        paneleditar.setVisible(false);
         Nombre.setText(usu.nombre);
         Apellido.setText(usu.apellido);
         dni.setText(usu.dni);
         email.setText(usu.email);
         direccion.setText(usu.direccion);
         telefono.setText(usu.telefono);
-        initComponents();
+        creditosl.setText("" + usu.creditos);
+        iniciarlabels();
         
     }
+    public void guardarDatos(Usuario usu) {
+        String nombre = nombreedit.getText();
+        String apellido = apellidoedit.getText();
+        String dni = dniedit.getText();
+        String direccion = direccionedit.getText();
+        String email = emailedit.getText();
+        String telefono = telefonoedit.getText();
+        String contrasenya = contraedit.getText();
+        
+        int id = usu.id; 
 
+    BD.guardarDatos(BD.makeConnection(), id, nombre, apellido, dni, direccion, email, telefono, contrasenya);
+    }
+    public void iniciarlabels() {
+        nombreedit.addMouseListener(new MouseAdapter() {
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+            // Limpiar el texto cuando se hace doble clic
+            nombreedit.setText("");
+        }
+    }
+});
+
+apellidoedit.addMouseListener(new MouseAdapter() {
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+            // Limpiar el texto cuando se hace doble clic
+            apellidoedit.setText("");
+        }
+    }
+});
+
+dniedit.addMouseListener(new MouseAdapter() {
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+            // Limpiar el texto cuando se hace doble clic
+            dniedit.setText("");
+        }
+    }
+});
+
+direccionedit.addMouseListener(new MouseAdapter() {
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+            // Limpiar el texto cuando se hace doble clic
+            direccionedit.setText("");
+        }
+    }
+});
+
+emailedit.addMouseListener(new MouseAdapter() {
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+            // Limpiar el texto cuando se hace doble clic
+            emailedit.setText("");
+        }
+    }
+});
+
+telefonoedit.addMouseListener(new MouseAdapter() {
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+            // Limpiar el texto cuando se hace doble clic
+            telefonoedit.setText("");
+        }
+    }
+});
+
+contraedit.addMouseListener(new MouseAdapter() {
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+            // Limpiar el texto cuando se hace doble clic
+            contraedit.setText("");
+        }
+    }
+});
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +125,39 @@ public class Perfil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelCreditos = new javax.swing.JPanel();
+        panelTransRealizada = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        panelNoPosible = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        panelNoTransRealizada = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        boton100 = new javax.swing.JButton();
+        inputDinero = new javax.swing.JTextField();
+        txtIngresarDinero = new javax.swing.JLabel();
+        boton30 = new javax.swing.JButton();
+        boton50 = new javax.swing.JButton();
+        boton10 = new javax.swing.JButton();
+        transferencia = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        paneleditar = new javax.swing.JPanel();
+        nombreedit = new javax.swing.JTextField();
+        guardar = new javax.swing.JButton();
+        cancelar = new javax.swing.JButton();
+        apellidoedit = new javax.swing.JTextField();
+        dniedit = new javax.swing.JTextField();
+        direccionedit = new javax.swing.JTextField();
+        emailedit = new javax.swing.JTextField();
+        telefonoedit = new javax.swing.JTextField();
+        contraedit = new javax.swing.JTextField();
+        Raya_verde1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         Imagen = new javax.swing.JLabel();
@@ -56,7 +174,161 @@ public class Perfil extends javax.swing.JFrame {
         direccion = new javax.swing.JLabel();
         email = new javax.swing.JLabel();
         telefono = new javax.swing.JLabel();
-        creditos = new javax.swing.JLabel();
+        creditosl = new javax.swing.JLabel();
+        SideBar = new javax.swing.JPanel();
+        lista = new javax.swing.JLabel();
+        favoritos = new javax.swing.JLabel();
+        buscador1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        botonCreditos = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        nCreditos1 = new javax.swing.JLabel();
+        nCreditos = new javax.swing.JLabel();
+        editar = new javax.swing.JButton();
+
+        panelCreditos.setBackground(new java.awt.Color(33, 40, 42));
+        panelCreditos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 195, 73)));
+        panelCreditos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelTransRealizada.setBackground(new java.awt.Color(255, 201, 14));
+        panelTransRealizada.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel5.setText("realizada ");
+        panelTransRealizada.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 99, -1, 131));
+
+        jLabel19.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel19.setText("Transeferencia ");
+        panelTransRealizada.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 16, -1, 131));
+
+        jButton2.setBackground(new java.awt.Color(33, 40, 42));
+        jButton2.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(139, 195, 73));
+        jButton2.setText("Completar");
+        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 195, 73), 2));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        panelTransRealizada.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 236, 186, 75));
+
+        panelCreditos.add(panelTransRealizada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 360));
+
+        panelNoPosible.setBackground(new java.awt.Color(255, 201, 14));
+        panelNoPosible.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel22.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel22.setText("entre 10");
+        panelNoPosible.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 153, -1, 42));
+
+        jLabel23.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel23.setText("Los numero tienen");
+        panelNoPosible.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 22, 397, 65));
+
+        jButton4.setBackground(new java.awt.Color(33, 40, 42));
+        jButton4.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(139, 195, 73));
+        jButton4.setText("Cerrar");
+        jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 195, 73), 2));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        panelNoPosible.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 262, 186, 75));
+
+        jLabel24.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel24.setText("que ser divisibles ");
+        panelNoPosible.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 93, -1, 42));
+
+        panelCreditos.add(panelNoPosible, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 360));
+
+        panelNoTransRealizada.setBackground(new java.awt.Color(255, 201, 14));
+        panelNoTransRealizada.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel20.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel20.setText("realizada ");
+        panelNoTransRealizada.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 143, -1, 78));
+
+        jButton3.setBackground(new java.awt.Color(33, 40, 42));
+        jButton3.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(139, 195, 73));
+        jButton3.setText("Cerrar");
+        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 195, 73), 2));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        panelNoTransRealizada.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 248, 186, 75));
+
+        jLabel21.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
+        jLabel21.setText("Transaccion no");
+        panelNoTransRealizada.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 47, 339, 78));
+
+        panelCreditos.add(panelNoTransRealizada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 360));
+
+        boton100.setFont(new java.awt.Font("Arial Black", 0, 20)); // NOI18N
+        boton100.setText("100€");
+        boton100.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton100ActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(boton100, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 56, 85, 85));
+
+        inputDinero.setToolTipText("");
+        inputDinero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputDineroActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(inputDinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 230, 394, 52));
+
+        txtIngresarDinero.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        txtIngresarDinero.setForeground(new java.awt.Color(139, 195, 73));
+        txtIngresarDinero.setText("Ingresa el dinero que quieras cambiar:");
+        panelCreditos.add(txtIngresarDinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 190, 373, 34));
+
+        boton30.setFont(new java.awt.Font("Arial Black", 0, 25)); // NOI18N
+        boton30.setText("30€");
+        boton30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton30ActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(boton30, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 56, 85, 85));
+
+        boton50.setFont(new java.awt.Font("Arial Black", 0, 25)); // NOI18N
+        boton50.setText("50€");
+        boton50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton50ActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(boton50, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 56, 85, 85));
+
+        boton10.setFont(new java.awt.Font("Arial Black", 0, 25)); // NOI18N
+        boton10.setText("10€");
+        boton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton10ActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(boton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 56, 85, 85));
+
+        transferencia.setBackground(new java.awt.Color(33, 40, 42));
+        transferencia.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        transferencia.setForeground(new java.awt.Color(139, 195, 73));
+        transferencia.setText("Completar Transferencia");
+        transferencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(139, 195, 73), 2));
+        transferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transferenciaActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(transferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 300, 175, 56));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1930, 1080));
@@ -65,6 +337,148 @@ public class Perfil extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(1930, 1080));
         jPanel1.setPreferredSize(new java.awt.Dimension(1930, 1080));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        paneleditar.setBackground(new java.awt.Color(255, 255, 255));
+        paneleditar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        paneleditar.setForeground(new java.awt.Color(153, 153, 153));
+        paneleditar.setEnabled(false);
+
+        nombreedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        nombreedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nombreedit.setText("Nuevo Nombre");
+        nombreedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreeditActionPerformed(evt);
+            }
+        });
+
+        guardar.setBackground(new java.awt.Color(153, 255, 102));
+        guardar.setText("Guardar");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarActionPerformed(evt);
+            }
+        });
+
+        cancelar.setBackground(new java.awt.Color(153, 255, 102));
+        cancelar.setText("Cancelar");
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarActionPerformed(evt);
+            }
+        });
+
+        apellidoedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        apellidoedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        apellidoedit.setText("Nuevo Apellido");
+        apellidoedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apellidoeditActionPerformed(evt);
+            }
+        });
+
+        dniedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dniedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        dniedit.setText("Nuevo DNI");
+        dniedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dnieditActionPerformed(evt);
+            }
+        });
+
+        direccionedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        direccionedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        direccionedit.setText("Nueva Direccion");
+        direccionedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                direccioneditActionPerformed(evt);
+            }
+        });
+
+        emailedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        emailedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        emailedit.setText("Nuevo Email");
+        emailedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emaileditActionPerformed(evt);
+            }
+        });
+
+        telefonoedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        telefonoedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        telefonoedit.setText("Nuevo Telefono");
+        telefonoedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telefonoeditActionPerformed(evt);
+            }
+        });
+
+        contraedit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        contraedit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        contraedit.setText("Nueva Contraseña");
+        contraedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contraeditActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout paneleditarLayout = new javax.swing.GroupLayout(paneleditar);
+        paneleditar.setLayout(paneleditarLayout);
+        paneleditarLayout.setHorizontalGroup(
+            paneleditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(nombreedit)
+            .addComponent(apellidoedit)
+            .addComponent(dniedit)
+            .addComponent(direccionedit)
+            .addComponent(emailedit)
+            .addComponent(telefonoedit)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneleditarLayout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
+                .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104))
+            .addComponent(contraedit)
+        );
+        paneleditarLayout.setVerticalGroup(
+            paneleditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneleditarLayout.createSequentialGroup()
+                .addComponent(nombreedit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(apellidoedit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dniedit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(direccionedit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(emailedit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(telefonoedit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contraedit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(paneleditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(paneleditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 760, 390));
+
+        Raya_verde1.setBackground(new java.awt.Color(139, 195, 73));
+
+        javax.swing.GroupLayout Raya_verde1Layout = new javax.swing.GroupLayout(Raya_verde1);
+        Raya_verde1.setLayout(Raya_verde1Layout);
+        Raya_verde1Layout.setHorizontalGroup(
+            Raya_verde1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
+        Raya_verde1Layout.setVerticalGroup(
+            Raya_verde1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1080, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(Raya_verde1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 1, -1));
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 190, 200));
 
         jTextField1.setEditable(false);
@@ -81,49 +495,155 @@ public class Perfil extends javax.swing.JFrame {
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, 200, 120));
         jPanel1.add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, -1, -1));
 
+        Nombre.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         Nombre.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
-        jPanel1.add(Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, -1, -1));
+        jPanel1.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 260, 150, 30));
 
-        nombre_text.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        Apellido.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        Apellido.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 250, 30));
+
+        nombre_text.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         nombre_text.setForeground(new java.awt.Color(255, 255, 255));
         nombre_text.setText("Nombre:");
-        jPanel1.add(nombre_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, 160, -1));
+        jPanel1.add(nombre_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 260, 160, -1));
 
-        nombre_text1.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         nombre_text1.setForeground(new java.awt.Color(255, 255, 255));
         nombre_text1.setText("Créditos:");
-        jPanel1.add(nombre_text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, 90, -1));
+        jPanel1.add(nombre_text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 500, 110, -1));
 
-        nombre_text2.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         nombre_text2.setForeground(new java.awt.Color(255, 255, 255));
         nombre_text2.setText("Apellido:");
-        jPanel1.add(nombre_text2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 130, -1));
+        jPanel1.add(nombre_text2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 300, 130, -1));
 
-        nombre_text3.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         nombre_text3.setForeground(new java.awt.Color(255, 255, 255));
         nombre_text3.setText("DNI:");
-        jPanel1.add(nombre_text3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 90, -1));
+        jPanel1.add(nombre_text3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 340, 90, -1));
 
-        nombre_text4.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         nombre_text4.setForeground(new java.awt.Color(255, 255, 255));
         nombre_text4.setText("Dirección:");
-        jPanel1.add(nombre_text4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 90, -1));
+        jPanel1.add(nombre_text4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 380, 130, -1));
 
-        nombre_text5.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text5.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         nombre_text5.setForeground(new java.awt.Color(255, 255, 255));
         nombre_text5.setText("Email:");
-        jPanel1.add(nombre_text5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 80, -1));
+        jPanel1.add(nombre_text5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 420, 80, -1));
 
-        nombre_text6.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nombre_text6.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         nombre_text6.setForeground(new java.awt.Color(255, 255, 255));
         nombre_text6.setText("Teléfono:");
-        jPanel1.add(nombre_text6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, 70, -1));
-        jPanel1.add(dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, -1, -1));
-        jPanel1.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, -1, -1));
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, -1, -1));
-        jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, -1, -1));
-        jPanel1.add(creditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 490, -1, -1));
+        jPanel1.add(nombre_text6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 120, -1));
+
+        dni.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        dni.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 340, 190, 30));
+
+        direccion.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        direccion.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, 160, 30));
+
+        email.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        email.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 420, 180, 30));
+
+        telefono.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        telefono.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 460, 160, 30));
+
+        creditosl.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        creditosl.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(creditosl, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 500, 170, 30));
+
+        SideBar.setBackground(new java.awt.Color(33, 40, 42));
+        SideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/lista2.PNG"))); // NOI18N
+        lista.setText("jLabel2");
+        lista.setMaximumSize(new java.awt.Dimension(40, 40));
+        lista.setMinimumSize(new java.awt.Dimension(40, 40));
+        SideBar.add(lista, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 50, 50));
+
+        favoritos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/historial.PNG"))); // NOI18N
+        favoritos.setText("jLabel2");
+        favoritos.setMaximumSize(new java.awt.Dimension(40, 40));
+        favoritos.setMinimumSize(new java.awt.Dimension(40, 40));
+        SideBar.add(favoritos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 50, 50));
+
+        buscador1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/buscador.PNG"))); // NOI18N
+        buscador1.setText("buscador");
+        buscador1.setMaximumSize(new java.awt.Dimension(40, 40));
+        buscador1.setMinimumSize(new java.awt.Dimension(40, 40));
+        SideBar.add(buscador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 50, 50));
+
+        jButton1.setBackground(new java.awt.Color(33, 40, 42));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/profile.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        botonCreditos.setBackground(new java.awt.Color(139, 195, 73));
+        botonCreditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/iconoCredito.png"))); // NOI18N
+        botonCreditos.setBorderPainted(false);
+        botonCreditos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCreditosActionPerformed(evt);
+            }
+        });
+        SideBar.add(botonCreditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 70, 60));
+
+        jPanel6.setBackground(new java.awt.Color(139, 195, 73));
+
+        nCreditos1.setBackground(new java.awt.Color(139, 195, 73));
+        nCreditos1.setText("Creditos:");
+        nCreditos1.setToolTipText("");
+        nCreditos1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        nCreditos1.setInheritsPopupMenu(false);
+
+        nCreditos.setBackground(new java.awt.Color(139, 195, 73));
+        nCreditos.setText("n");
+        nCreditos.setToolTipText("");
+        nCreditos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        nCreditos.setInheritsPopupMenu(false);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nCreditos1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addComponent(nCreditos1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        SideBar.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 70, 50));
+
+        jPanel1.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 1070));
+
+        editar.setBackground(new java.awt.Color(153, 255, 153));
+        editar.setText("Modificar Perfil");
+        editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 570, 130, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,6 +662,157 @@ public class Perfil extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void botonCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCreditosActionPerformed
+
+        if(entrado == true){
+            entrado = false;
+            panelCreditos.setVisible(true);
+        } else {
+            panelCreditos.setVisible(false);
+            entrado = true;
+        }
+
+    }//GEN-LAST:event_botonCreditosActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        panelTransRealizada.setVisible(false);
+        transferencia.setVisible(true);
+        boton100.setVisible(true);
+        boton30.setVisible(true);
+        boton50.setVisible(true);
+        boton10.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        panelNoPosible.setVisible(false);
+        transferencia.setVisible(true);
+        boton100.setVisible(true);
+        boton30.setVisible(true);
+        boton50.setVisible(true);
+        boton10.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void boton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton100ActionPerformed
+        inputDinero.setText("100");
+    }//GEN-LAST:event_boton100ActionPerformed
+
+    private void inputDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDineroActionPerformed
+
+    }//GEN-LAST:event_inputDineroActionPerformed
+
+    private void boton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton30ActionPerformed
+        inputDinero.setText("30");
+    }//GEN-LAST:event_boton30ActionPerformed
+
+    private void boton50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton50ActionPerformed
+        inputDinero.setText("50");
+    }//GEN-LAST:event_boton50ActionPerformed
+
+    private void boton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton10ActionPerformed
+        inputDinero.setText("10");
+    }//GEN-LAST:event_boton10ActionPerformed
+
+    private void transferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferenciaActionPerformed
+
+        String textoInputDinero = inputDinero.getText();
+        int valorDinero = Integer.parseInt(textoInputDinero);
+
+        if (valorDinero % 10 == 0) {
+
+            try {
+                String sql = "UPDATE USUARIOS SET creditos = ? WHERE id = ?";
+
+                PreparedStatement statement = BD.makeConnection().prepareStatement(sql);
+
+                // Define el valor que deseas actualizar usando la variable
+                statement.setInt(1, creditos+(valorDinero/10));
+                statement.setInt(2, BD.comprobarUsuarioObj().getId());
+
+                // Ejecuta la actualización
+                int filasActualizadas = statement.executeUpdate();
+
+                if (filasActualizadas > 0) {
+                    System.out.println("Actualización exitosa. Filas actualizadas: " + filasActualizadas);
+                    panelTransRealizada.setVisible(true);
+                    transferencia.setVisible(false);
+                    boton100.setVisible(false);
+                    boton30.setVisible(false);
+                    boton50.setVisible(false);
+                    boton10.setVisible(false);
+                    creditos += valorDinero/10;
+                    nCreditos.setText(String.valueOf(creditos));
+
+                } else {
+                    System.out.println("Ninguna fila fue actualizada.");
+                }
+            } catch (SQLException e) {e.printStackTrace();}
+
+        } else {
+
+            panelNoPosible.setVisible(true);
+            transferencia.setVisible(false);
+            boton100.setVisible(false);
+            boton30.setVisible(false);
+            boton50.setVisible(false);
+            boton10.setVisible(false);
+
+        }
+    }//GEN-LAST:event_transferenciaActionPerformed
+
+    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
+
+        paneleditar.setVisible(true);
+        editar.setVisible(false);
+    }//GEN-LAST:event_editarActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        
+                paneleditar.setVisible(false);
+        editar.setVisible(true);
+
+    }//GEN-LAST:event_cancelarActionPerformed
+
+    private void apellidoeditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidoeditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apellidoeditActionPerformed
+
+    private void dnieditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dnieditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dnieditActionPerformed
+
+    private void direccioneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccioneditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_direccioneditActionPerformed
+
+    private void emaileditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emaileditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emaileditActionPerformed
+
+    private void telefonoeditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoeditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefonoeditActionPerformed
+
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        guardarDatos(usu);
+    }//GEN-LAST:event_guardarActionPerformed
+
+    private void contraeditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraeditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contraeditActionPerformed
+
+    private void nombreeditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreeditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreeditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,13 +853,46 @@ public class Perfil extends javax.swing.JFrame {
     private javax.swing.JLabel Apellido;
     private javax.swing.JLabel Imagen;
     private javax.swing.JLabel Nombre;
-    private javax.swing.JLabel creditos;
+    private javax.swing.JPanel Raya_verde1;
+    private javax.swing.JPanel SideBar;
+    private javax.swing.JTextField apellidoedit;
+    private javax.swing.JButton boton10;
+    private javax.swing.JButton boton100;
+    private javax.swing.JButton boton30;
+    private javax.swing.JButton boton50;
+    private javax.swing.JButton botonCreditos;
+    private javax.swing.JLabel buscador1;
+    private javax.swing.JButton cancelar;
+    private javax.swing.JTextField contraedit;
+    private javax.swing.JLabel creditosl;
     private javax.swing.JLabel direccion;
+    private javax.swing.JTextField direccionedit;
     private javax.swing.JLabel dni;
+    private javax.swing.JTextField dniedit;
+    private javax.swing.JButton editar;
     private javax.swing.JLabel email;
+    private javax.swing.JTextField emailedit;
+    private javax.swing.JLabel favoritos;
+    private javax.swing.JButton guardar;
+    private javax.swing.JTextField inputDinero;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lista;
+    private javax.swing.JLabel nCreditos;
+    private javax.swing.JLabel nCreditos1;
     private javax.swing.JLabel nombre_text;
     private javax.swing.JLabel nombre_text1;
     private javax.swing.JLabel nombre_text2;
@@ -196,6 +900,15 @@ public class Perfil extends javax.swing.JFrame {
     private javax.swing.JLabel nombre_text4;
     private javax.swing.JLabel nombre_text5;
     private javax.swing.JLabel nombre_text6;
+    private javax.swing.JTextField nombreedit;
+    private javax.swing.JPanel panelCreditos;
+    private javax.swing.JPanel panelNoPosible;
+    private javax.swing.JPanel panelNoTransRealizada;
+    private javax.swing.JPanel panelTransRealizada;
+    private javax.swing.JPanel paneleditar;
     private javax.swing.JLabel telefono;
+    private javax.swing.JTextField telefonoedit;
+    private javax.swing.JButton transferencia;
+    private javax.swing.JLabel txtIngresarDinero;
     // End of variables declaration//GEN-END:variables
 }
