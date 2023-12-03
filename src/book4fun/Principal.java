@@ -84,7 +84,8 @@ public class Principal extends javax.swing.JFrame {
                 viviendasReservadas.add(resultSet2.getInt("ID_VIVIENDA"));
                 usuarioReservadas.add(resultSet2.getInt("ID_USUARIO"));
             }
-
+            int index = 0; 
+            System.out.println(usuarioReservadas);
             while (resultSet.next()) {
                 boolean reservado;
                 int idVivienda = resultSet.getInt("ID");
@@ -94,7 +95,7 @@ public class Principal extends javax.swing.JFrame {
                      
                 } else  {reservado = false;}
                 
-                JPanel m = modeloPanel(reservado, idVivienda, resultSet.getString("NOMBRE"),
+                JPanel m = modeloPanel(index,usuarioReservadas, reservado, idVivienda, resultSet.getString("NOMBRE"),
                                resultSet.getString("DIRECCION"), resultSet.getString("LOCALIZACION"),
                                resultSet.getString("TIPO"), resultSet.getInt("HABITACIONES"),
                                resultSet.getDouble("PRECIO_DIA"), resultSet.getInt("PISCINA") == 1,
@@ -122,7 +123,7 @@ public class Principal extends javax.swing.JFrame {
                     vueltas = 0;
                 
                 } else {vueltas++;}
-  
+                index++;
             }
 
 
@@ -132,8 +133,14 @@ public class Principal extends javax.swing.JFrame {
     
     }
      
-    private JPanel modeloPanel(boolean reservado, int id,String nombre, String direccion, String localizacion, String tipo, int habitaciones, double precioDia, boolean tienePiscina, boolean tieneWifi) {
+    private JPanel modeloPanel(int index,ArrayList<Integer> usuarioReservadas,boolean reservado, int id,String nombre, String direccion, String localizacion, String tipo, int habitaciones, double precioDia, boolean tienePiscina, boolean tieneWifi) {
         
+        boolean tuya = false;
+        if (index < usuarioReservadas.size()) {
+            
+            if(usuarioReservadas.get(index) == BD.comprobarUsuarioObj().getId()){ tuya = true; } else { tuya = false; }
+            
+        }
         
         JPanel m = new JPanel();
         m.setLayout(new AbsoluteLayout());
@@ -256,7 +263,7 @@ public class Principal extends javax.swing.JFrame {
         totalc = 0;
         JLabel lTotalCreditos = new JLabel("Creditos totales:  " +totalc);
 
-        if(reservado == false){
+        if(reservado == false && tuya == false){
             
            botonPersonalizado.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
            botonPersonalizado.setForeground(new Color(139, 195, 73));
