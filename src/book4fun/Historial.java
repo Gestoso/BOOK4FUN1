@@ -51,7 +51,12 @@ public class Historial extends javax.swing.JFrame {
         
         initComponents();
         perfilBut.setIcon(icono);
-
+        ImageIcon icon = new ImageIcon(Principal.class.getResource("/book4fun/imagenes/perfil.jpg"));
+        java.awt.Image image = icon.getImage();
+        java.awt.Image newImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        perfilBut.setPreferredSize(new Dimension(50, 50));
+        ImageIcon newIcon = new ImageIcon(newImage);
+        perfilBut.setIcon(newIcon);
         creditos = BD.comprobarUsuarioObj().getCreditos();
         nCreditos.setText(String.valueOf(creditos));
 
@@ -92,7 +97,7 @@ public class Historial extends javax.swing.JFrame {
                 
                 if(viviendasReservadas.contains(idVivienda) && usuarioReservadas.contains(BD.comprobarUsuarioObj().getId())){
                 
-                     JPanel m = modeloPanel( idVivienda, resultSet.getString("NOMBRE"),
+                     JPanel m = modeloPanel(resultSet.getString("IMG"), idVivienda, resultSet.getString("NOMBRE"),
                                resultSet.getString("DIRECCION"), resultSet.getString("LOCALIZACION"),
                                resultSet.getString("TIPO"), resultSet.getInt("HABITACIONES"),
                                resultSet.getDouble("PRECIO_DIA"), resultSet.getInt("PISCINA") == 1,
@@ -133,16 +138,25 @@ public class Historial extends javax.swing.JFrame {
     
     }
      
-    private JPanel modeloPanel(int id,String nombre, String direccion, String localizacion, String tipo, int habitaciones, double precioDia, boolean tienePiscina, boolean tieneWifi) {
+    private JPanel modeloPanel(String images,int id,String nombre, String direccion, String localizacion, String tipo, int habitaciones, double precioDia, boolean tienePiscina, boolean tieneWifi) {
         
         
         JPanel m = new JPanel();
         m.setLayout(new AbsoluteLayout());
 /////////////////////////////////////////////////////////////////
+         JLabel img = new JLabel();
+        AbsoluteConstraints medidas = new AbsoluteConstraints(20, 20, 350, 300);
+        ImageIcon icon = new ImageIcon(Principal.class.getResource(images));
+        java.awt.Image image = icon.getImage();
+        java.awt.Image newImage = image.getScaledInstance(350, 250, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon newIcon = new ImageIcon(newImage);
+        img.setIcon(newIcon);
+        m.add(img, medidas);
+
         JLabel etiquetaNombre  = new JLabel("NOMBRE: ");
         Font fuente = new Font("Segoe UI Black", Font.PLAIN, 30);
         etiquetaNombre .setFont(fuente);
-        AbsoluteConstraints medidas = new AbsoluteConstraints(400, 5, 300, 100);
+        medidas = new AbsoluteConstraints(400, 5, 300, 100);
         m.add(etiquetaNombre , medidas);
         
         JLabel valorNombre  = new JLabel(nombre);
@@ -590,25 +604,24 @@ public class Historial extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
-        boton100 = new javax.swing.JButton();
         inputDinero = new javax.swing.JTextField();
         txtIngresarDinero = new javax.swing.JLabel();
         boton30 = new javax.swing.JButton();
         boton50 = new javax.swing.JButton();
         boton10 = new javax.swing.JButton();
         transferencia = new javax.swing.JButton();
+        boton100 = new javax.swing.JButton();
         Raya_verde1 = new javax.swing.JPanel();
-        filtro = new javax.swing.JPanel();
         SideBar = new javax.swing.JPanel();
-        lista = new javax.swing.JLabel();
-        favoritos = new javax.swing.JLabel();
-        buscador1 = new javax.swing.JLabel();
         perfilBut = new javax.swing.JButton();
         botonCreditos = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         nCreditos1 = new javax.swing.JLabel();
         nCreditos = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        filtro = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         registro = new javax.swing.JPanel();
         nombre_text3 = new javax.swing.JLabel();
@@ -723,15 +736,6 @@ public class Historial extends javax.swing.JFrame {
 
         panelCreditos.add(panelNoTransRealizada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 430, 360));
 
-        boton100.setFont(new java.awt.Font("Arial Black", 0, 20)); // NOI18N
-        boton100.setText("100€");
-        boton100.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton100ActionPerformed(evt);
-            }
-        });
-        panelCreditos.add(boton100, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 56, 85, 85));
-
         inputDinero.setToolTipText("");
         inputDinero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -784,6 +788,15 @@ public class Historial extends javax.swing.JFrame {
         });
         panelCreditos.add(transferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 300, 175, 56));
 
+        boton100.setFont(new java.awt.Font("Arial Black", 0, 20)); // NOI18N
+        boton100.setText("100€");
+        boton100.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton100ActionPerformed(evt);
+            }
+        });
+        panelCreditos.add(boton100, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 56, 100, 85));
+
         Panel_General.add(panelCreditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 450, 390));
 
         Raya_verde1.setBackground(new java.awt.Color(139, 195, 73));
@@ -801,40 +814,19 @@ public class Historial extends javax.swing.JFrame {
 
         Panel_General.add(Raya_verde1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 1, -1));
 
-        filtro.setBackground(new java.awt.Color(139, 195, 73));
-        filtro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Panel_General.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 1820, 70));
-
         SideBar.setBackground(new java.awt.Color(33, 40, 42));
         SideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/lista2.PNG"))); // NOI18N
-        lista.setText("jLabel2");
-        lista.setMaximumSize(new java.awt.Dimension(40, 40));
-        lista.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(lista, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 50, 50));
-
-        favoritos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/historial.PNG"))); // NOI18N
-        favoritos.setText("jLabel2");
-        favoritos.setMaximumSize(new java.awt.Dimension(40, 40));
-        favoritos.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(favoritos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 50, 50));
-
-        buscador1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/buscador.PNG"))); // NOI18N
-        buscador1.setText("buscador");
-        buscador1.setMaximumSize(new java.awt.Dimension(40, 40));
-        buscador1.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(buscador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 50, 50));
-
-        perfilBut.setText("jButton1");
+        perfilBut.setText("  ");
         perfilBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 perfilButActionPerformed(evt);
             }
         });
-        SideBar.add(perfilBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 720, -1, -1));
+        SideBar.add(perfilBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         botonCreditos.setBackground(new java.awt.Color(139, 195, 73));
+        botonCreditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/iconoCredito.png"))); // NOI18N
         botonCreditos.setBorderPainted(false);
         botonCreditos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -846,13 +838,13 @@ public class Historial extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(139, 195, 73));
 
         nCreditos1.setBackground(new java.awt.Color(139, 195, 73));
-        nCreditos1.setText("Creditos:");
+        nCreditos1.setText(" Creditos:");
         nCreditos1.setToolTipText("");
         nCreditos1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         nCreditos1.setInheritsPopupMenu(false);
 
         nCreditos.setBackground(new java.awt.Color(139, 195, 73));
-        nCreditos.setText("n");
+        nCreditos.setText("     n");
         nCreditos.setToolTipText("");
         nCreditos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         nCreditos.setInheritsPopupMenu(false);
@@ -878,22 +870,45 @@ public class Historial extends javax.swing.JFrame {
 
         SideBar.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 70, 50));
 
-        jButton1.setText("Crear Alquiler");
+        jButton1.setBackground(new java.awt.Color(139, 195, 73));
+        jButton1.setText("Historial");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, -1, -1));
+        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 100, -1));
+
+        jButton5.setBackground(new java.awt.Color(139, 195, 73));
+        jButton5.setText("Reservas");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        SideBar.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 100, -1));
+
+        jButton7.setBackground(new java.awt.Color(139, 195, 73));
+        jButton7.setText("Inicio");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        SideBar.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 100, -1));
 
         Panel_General.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 120, 1070));
+
+        filtro.setBackground(new java.awt.Color(139, 195, 73));
+        filtro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Panel_General.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 1820, 70));
 
         registro.setBackground(new java.awt.Color(33, 40, 42));
         registro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nombre_text3.setFont(new java.awt.Font("Segoe UI Black", 1, 30)); // NOI18N
         nombre_text3.setForeground(new java.awt.Color(255, 255, 255));
-        nombre_text3.setText("Alquileres disponibles:");
+        nombre_text3.setText("Historial de reservas:");
         nombre_text3.setToolTipText("");
         registro.add(nombre_text3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 420, -1));
 
@@ -991,25 +1006,6 @@ public class Historial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void perfilButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilButActionPerformed
-Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
-    Frame.setVisible(true); // Hace visible el JFrame "Register"
-    this.dispose();
-
-    }//GEN-LAST:event_perfilButActionPerformed
-
-    private void botonCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCreditosActionPerformed
-
-        if(entrado == true){
-            entrado = false;
-            panelCreditos.setVisible(true);
-        } else {
-            panelCreditos.setVisible(false);
-            entrado = true;
-        }
-
-    }//GEN-LAST:event_botonCreditosActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         panelTransRealizada.setVisible(false);
@@ -1033,10 +1029,6 @@ Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void boton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton100ActionPerformed
-        inputDinero.setText("100");
-    }//GEN-LAST:event_boton100ActionPerformed
 
     private void inputDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDineroActionPerformed
 
@@ -1102,13 +1094,47 @@ Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
 
     }//GEN-LAST:event_transferenciaActionPerformed
 
+    private void perfilButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilButActionPerformed
+        Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
+        Frame.setVisible(true); // Hace visible el JFrame "Register"
+        this.dispose();
+    }//GEN-LAST:event_perfilButActionPerformed
+
+    private void botonCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCreditosActionPerformed
+
+        if(entrado == true){
+            entrado = false;
+            panelCreditos.setVisible(true);
+        } else {
+            panelCreditos.setVisible(false);
+            entrado = true;
+        }
+    }//GEN-LAST:event_botonCreditosActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-             CreacionAlquiler Frame = new CreacionAlquiler(); // Crea una instancia del JFrame "Register"
-    Frame.setVisible(true);
-    this.dispose();
-
+        Historial Frame = new Historial();
+        Frame.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+        ReservasHechas Frame = new ReservasHechas();
+        Frame.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        Principal Frame = new Principal();
+        Frame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void boton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton100ActionPerformed
+        inputDinero.setText("100");
+    }//GEN-LAST:event_boton100ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1170,8 +1196,6 @@ Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
     private javax.swing.JButton boton30;
     private javax.swing.JButton boton50;
     private javax.swing.JButton botonCreditos;
-    private javax.swing.JLabel buscador1;
-    private javax.swing.JLabel favoritos;
     private javax.swing.JPanel filtro;
     private javax.swing.JPanel imagen;
     private javax.swing.JTextField inputDinero;
@@ -1179,6 +1203,8 @@ Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1199,7 +1225,6 @@ Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lista;
     private javax.swing.JPanel modelAlquiler;
     private javax.swing.JLabel nCreditos;
     private javax.swing.JLabel nCreditos1;

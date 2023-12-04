@@ -4,6 +4,7 @@
  */
 package book4fun;
 
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 /**
  *
  * @author gesto
@@ -25,7 +27,12 @@ public class CreacionAlquiler extends javax.swing.JFrame {
         
         creditos = BD.comprobarUsuarioObj().getCreditos();
         nCreditos.setText(String.valueOf(creditos));
-
+        ImageIcon icon = new ImageIcon(Principal.class.getResource("/book4fun/imagenes/perfil.jpg"));
+        java.awt.Image image = icon.getImage();
+        java.awt.Image newImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        perfilBut.setPreferredSize(new Dimension(50, 50));
+        ImageIcon newIcon = new ImageIcon(newImage);
+        perfilBut.setIcon(newIcon);
         panelCreditos.setVisible(false);
         panelNoTransRealizada.setVisible(false);
         panelTransRealizada.setVisible(false);
@@ -64,16 +71,17 @@ public class CreacionAlquiler extends javax.swing.JFrame {
         boton50 = new javax.swing.JButton();
         boton10 = new javax.swing.JButton();
         transferencia = new javax.swing.JButton();
+        Raya_verde1 = new javax.swing.JPanel();
         SideBar = new javax.swing.JPanel();
-        lista = new javax.swing.JLabel();
-        favoritos = new javax.swing.JLabel();
-        buscador1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        perfilBut = new javax.swing.JButton();
         botonCreditos = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         nCreditos1 = new javax.swing.JLabel();
         nCreditos = new javax.swing.JLabel();
-        Raya_verde1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         filtro = new javax.swing.JPanel();
         registro = new javax.swing.JPanel();
         registro1 = new javax.swing.JPanel();
@@ -263,36 +271,31 @@ public class CreacionAlquiler extends javax.swing.JFrame {
 
         Panel_General.add(panelCreditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 450, 390));
 
+        Raya_verde1.setBackground(new java.awt.Color(139, 195, 73));
+
+        javax.swing.GroupLayout Raya_verde1Layout = new javax.swing.GroupLayout(Raya_verde1);
+        Raya_verde1.setLayout(Raya_verde1Layout);
+        Raya_verde1Layout.setHorizontalGroup(
+            Raya_verde1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        Raya_verde1Layout.setVerticalGroup(
+            Raya_verde1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1080, Short.MAX_VALUE)
+        );
+
+        Panel_General.add(Raya_verde1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 1, -1));
+
         SideBar.setBackground(new java.awt.Color(33, 40, 42));
         SideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/lista2.PNG"))); // NOI18N
-        lista.setText("jLabel2");
-        lista.setMaximumSize(new java.awt.Dimension(40, 40));
-        lista.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(lista, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 50, 50));
-
-        favoritos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/historial.PNG"))); // NOI18N
-        favoritos.setText("jLabel2");
-        favoritos.setMaximumSize(new java.awt.Dimension(40, 40));
-        favoritos.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(favoritos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 50, 50));
-
-        buscador1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/buscador.PNG"))); // NOI18N
-        buscador1.setText("buscador");
-        buscador1.setMaximumSize(new java.awt.Dimension(40, 40));
-        buscador1.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(buscador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 50, 50));
-
-        jButton1.setBackground(new java.awt.Color(33, 40, 42));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/profile.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        perfilBut.setText("  ");
+        perfilBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                perfilButActionPerformed(evt);
             }
         });
-        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        SideBar.add(perfilBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         botonCreditos.setBackground(new java.awt.Color(139, 195, 73));
         botonCreditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/iconoCredito.png"))); // NOI18N
@@ -307,13 +310,13 @@ public class CreacionAlquiler extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(139, 195, 73));
 
         nCreditos1.setBackground(new java.awt.Color(139, 195, 73));
-        nCreditos1.setText("Creditos:");
+        nCreditos1.setText(" Creditos:");
         nCreditos1.setToolTipText("");
         nCreditos1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         nCreditos1.setInheritsPopupMenu(false);
 
         nCreditos.setBackground(new java.awt.Color(139, 195, 73));
-        nCreditos.setText("n");
+        nCreditos.setText("     n");
         nCreditos.setToolTipText("");
         nCreditos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         nCreditos.setInheritsPopupMenu(false);
@@ -339,22 +342,43 @@ public class CreacionAlquiler extends javax.swing.JFrame {
 
         SideBar.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 70, 50));
 
-        Panel_General.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 100, 1070));
+        jButton1.setBackground(new java.awt.Color(139, 195, 73));
+        jButton1.setText("Historial");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 100, -1));
 
-        Raya_verde1.setBackground(new java.awt.Color(139, 195, 73));
+        jButton6.setBackground(new java.awt.Color(139, 195, 73));
+        jButton6.setText("Reservas");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        SideBar.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 100, -1));
 
-        javax.swing.GroupLayout Raya_verde1Layout = new javax.swing.GroupLayout(Raya_verde1);
-        Raya_verde1.setLayout(Raya_verde1Layout);
-        Raya_verde1Layout.setHorizontalGroup(
-            Raya_verde1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        Raya_verde1Layout.setVerticalGroup(
-            Raya_verde1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
-        );
+        jButton7.setBackground(new java.awt.Color(139, 195, 73));
+        jButton7.setText("C. Alquiler");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        SideBar.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 100, -1));
 
-        Panel_General.add(Raya_verde1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 1, -1));
+        jButton8.setBackground(new java.awt.Color(139, 195, 73));
+        jButton8.setText("Inicio");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        SideBar.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 100, -1));
+
+        Panel_General.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 120, 1070));
 
         filtro.setBackground(new java.awt.Color(139, 195, 73));
 
@@ -574,23 +598,6 @@ public class CreacionAlquiler extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void botonCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCreditosActionPerformed
-        
-        
-        if(entrado == true){
-            entrado = false;
-            panelCreditos.setVisible(true);
-        } else { 
-            panelCreditos.setVisible(false);
-            entrado = true; 
-        }
-        
-    }//GEN-LAST:event_botonCreditosActionPerformed
-
     private void boton100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton100ActionPerformed
        inputDinero.setText("100");
     }//GEN-LAST:event_boton100ActionPerformed
@@ -743,6 +750,52 @@ public class CreacionAlquiler extends javax.swing.JFrame {
     private void nombreDueñoAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreDueñoAlquilerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreDueñoAlquilerActionPerformed
+
+    private void perfilButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilButActionPerformed
+        Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
+        Frame.setVisible(true); // Hace visible el JFrame "Register"
+        this.dispose();
+    }//GEN-LAST:event_perfilButActionPerformed
+
+    private void botonCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCreditosActionPerformed
+
+        if(entrado == true){
+            entrado = false;
+            panelCreditos.setVisible(true);
+        } else {
+            panelCreditos.setVisible(false);
+            entrado = true;
+        }
+    }//GEN-LAST:event_botonCreditosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        Historial Frame = new Historial();
+        Frame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+        ReservasHechas Frame = new ReservasHechas();
+        Frame.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+
+        ReservasHechas Frame = new ReservasHechas(); // Crea una instancia del JFrame "Register"
+        Frame.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        Principal Frame = new Principal();
+        Frame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton8ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -769,10 +822,8 @@ public class CreacionAlquiler extends javax.swing.JFrame {
     private javax.swing.JButton boton30;
     private javax.swing.JButton boton50;
     private javax.swing.JButton botonCreditos;
-    private javax.swing.JLabel buscador1;
     private javax.swing.JButton crearAlquiler;
     private javax.swing.JTextField direccionAlquiler;
-    private javax.swing.JLabel favoritos;
     private javax.swing.JPanel filtro;
     private javax.swing.JTextField habitacionesAlquiler;
     private javax.swing.JPanel imagen;
@@ -782,6 +833,9 @@ public class CreacionAlquiler extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -811,7 +865,6 @@ public class CreacionAlquiler extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JLabel lista;
     private javax.swing.JTextField localizacionAlquiler;
     private javax.swing.JTextField metrosAlquiler;
     private javax.swing.JLabel nCreditos;
@@ -822,6 +875,7 @@ public class CreacionAlquiler extends javax.swing.JFrame {
     private javax.swing.JPanel panelNoPosible;
     private javax.swing.JPanel panelNoTransRealizada;
     private javax.swing.JPanel panelTransRealizada;
+    private javax.swing.JButton perfilBut;
     private javax.swing.JCheckBox piscinaAlquiler;
     private javax.swing.JTextField precioAlquilerDia;
     private javax.swing.JPanel registro;

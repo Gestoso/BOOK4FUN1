@@ -223,15 +223,16 @@ public Usuario getUsuario() {
         System.out.println("Nombre: " + Controlador.getUsuario() + " Contra: " + Controlador.getContrasenya());
         usu = BD.comprobarUsuarioObj();
 
-if (usu != null) {
-    System.out.println("Cheeeeeeeeck");
-    Principal Frame = new Principal(); // Crea una instancia del JFrame "Register"
-    Frame.setVisible(true); // Hace visible el JFrame "Register"
-    this.dispose();
-} else {
-    System.out.println("Inicio de sesión fallido. Verifica tus credenciales.");
-    mensaje_error.setVisible(true);
-}
+        if (usu != null) {
+            
+            Principal Frame = new Principal(); // Crea una instancia del JFrame "Register"
+            Frame.setVisible(true); // Hace visible el JFrame "Register"
+            this.dispose();
+            
+        } else {
+
+            mensaje_error.setVisible(true);
+        }
        
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -42,14 +42,14 @@ public class Principal extends javax.swing.JFrame {
     public int totalc;
     
     public Principal() {
-
-        Login login = new Login();
-        login.setUsuario();
-        Usuario usu = login.getUsuario();
-        ImageIcon icono = obtenerIconoDesdeEnlace(usu.img);
         
         initComponents();
-        perfilBut.setIcon(icono);
+        ImageIcon icon = new ImageIcon(Principal.class.getResource("/book4fun/imagenes/perfil.jpg"));
+        java.awt.Image image = icon.getImage();
+        java.awt.Image newImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        perfilBut.setPreferredSize(new Dimension(50, 50));
+        ImageIcon newIcon = new ImageIcon(newImage);
+        perfilBut.setIcon(newIcon);
 
         creditos = BD.comprobarUsuarioObj().getCreditos();
         nCreditos.setText(String.valueOf(creditos));
@@ -87,6 +87,7 @@ public class Principal extends javax.swing.JFrame {
             int index = 0; 
             System.out.println(usuarioReservadas);
             while (resultSet.next()) {
+                
                 boolean reservado;
                 int idVivienda = resultSet.getInt("ID");
                 if(viviendasReservadas.contains(idVivienda) && usuarioReservadas.contains(BD.comprobarUsuarioObj().getId())){
@@ -95,11 +96,12 @@ public class Principal extends javax.swing.JFrame {
                      
                 } else  {reservado = false;}
                 
-                JPanel m = modeloPanel(index,usuarioReservadas, reservado, idVivienda, resultSet.getString("NOMBRE"),
+                JPanel m = modeloPanel(resultSet.getString("IMG"),index,usuarioReservadas, reservado, idVivienda, resultSet.getString("NOMBRE"),
                                resultSet.getString("DIRECCION"), resultSet.getString("LOCALIZACION"),
                                resultSet.getString("TIPO"), resultSet.getInt("HABITACIONES"),
                                resultSet.getDouble("PRECIO_DIA"), resultSet.getInt("PISCINA") == 1,
-                               resultSet.getInt("WIFI") == 1);
+                              resultSet.getInt("WIFI") == 1);
+                
                 if(vueltas % 2 == 0){
                     
                     alquileres[0] = m;
@@ -123,6 +125,7 @@ public class Principal extends javax.swing.JFrame {
                     vueltas = 0;
                 
                 } else {vueltas++;}
+                
                 index++;
             }
 
@@ -133,7 +136,7 @@ public class Principal extends javax.swing.JFrame {
     
     }
      
-    private JPanel modeloPanel(int index,ArrayList<Integer> usuarioReservadas,boolean reservado, int id,String nombre, String direccion, String localizacion, String tipo, int habitaciones, double precioDia, boolean tienePiscina, boolean tieneWifi) {
+    private JPanel modeloPanel(String images, int index,ArrayList<Integer> usuarioReservadas,boolean reservado, int id,String nombre, String direccion, String localizacion, String tipo, int habitaciones, double precioDia, boolean tienePiscina, boolean tieneWifi) {
         
         boolean tuya = false;
         if (index < usuarioReservadas.size()) {
@@ -145,10 +148,20 @@ public class Principal extends javax.swing.JFrame {
         JPanel m = new JPanel();
         m.setLayout(new AbsoluteLayout());
 /////////////////////////////////////////////////////////////////
+
+        JLabel img = new JLabel();
+        AbsoluteConstraints medidas = new AbsoluteConstraints(20, 20, 350, 300);
+        ImageIcon icon = new ImageIcon(Principal.class.getResource(images));
+        java.awt.Image image = icon.getImage();
+        java.awt.Image newImage = image.getScaledInstance(350, 250, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon newIcon = new ImageIcon(newImage);
+        img.setIcon(newIcon);
+        m.add(img, medidas);
+
         JLabel etiquetaNombre  = new JLabel("NOMBRE: ");
         Font fuente = new Font("Segoe UI Black", Font.PLAIN, 30);
         etiquetaNombre .setFont(fuente);
-        AbsoluteConstraints medidas = new AbsoluteConstraints(400, 5, 300, 100);
+        medidas = new AbsoluteConstraints(400, 5, 300, 100);
         m.add(etiquetaNombre , medidas);
         
         JLabel valorNombre  = new JLabel(nombre);
@@ -434,7 +447,7 @@ public class Principal extends javax.swing.JFrame {
                      medidas = new AbsoluteConstraints(375, 340, 170, 70);
                      m.add(botonActualizar , medidas);
                      
-                     JButton botonCancelarActualizar = new JButton("Cancelar");
+                     JButton botonCancelarActualizar = new JButton("Atras");
                      botonCancelarActualizar.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
                      botonCancelarActualizar.setForeground(new Color(139, 195, 73));
                      botonCancelarActualizar.setBackground(new Color(33, 40, 42));
@@ -591,155 +604,156 @@ public class Principal extends javax.swing.JFrame {
                 if(fEntrada != null && fSalida != null){
                     
                     if(totalc <= creditos){
-
                         if (fEntrada.after(fechaActual) && fSalida.after(fechaActual)) {
+                            if (fEntrada.before(fSalida)) {
 
-                            LocalDate localDateEntrada = fEntrada.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-                            LocalDate localDateSalida = fSalida.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+                                LocalDate localDateEntrada = fEntrada.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+                                LocalDate localDateSalida = fSalida.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
 
-                            long diasDeDiferencia = ChronoUnit.DAYS.between(localDateEntrada, localDateSalida) +1;
-                            int precio = (int) ((diasDeDiferencia + 1) * precioDia);
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////                    
-                            JPanel estasSeguro = new JPanel();
-                            AbsoluteConstraints constraints = new AbsoluteConstraints(0, 0, 800, 500);
-                            m.add(estasSeguro, constraints);
-                            estasSeguro.setBackground(new Color(255,201,14));
-                            Color colorBorde = new Color(139, 195, 73);
-                            estasSeguro.setBorder(new LineBorder(colorBorde, 4));
-                            m.revalidate();
-                            estasSeguro.setLayout(new AbsoluteLayout());
+                                long diasDeDiferencia = ChronoUnit.DAYS.between(localDateEntrada, localDateSalida) +1;
+                                int precio = (int) ((diasDeDiferencia + 1) * precioDia);
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////                    
+                                JPanel estasSeguro = new JPanel();
+                                AbsoluteConstraints constraints = new AbsoluteConstraints(0, 0, 800, 500);
+                                m.add(estasSeguro, constraints);
+                                estasSeguro.setBackground(new Color(255,201,14));
+                                Color colorBorde = new Color(139, 195, 73);
+                                estasSeguro.setBorder(new LineBorder(colorBorde, 4));
+                                m.revalidate();
+                                estasSeguro.setLayout(new AbsoluteLayout());
 
-                            m.remove(botonPersonalizado);
-                            m.remove(fechaSalida);
-                            m.remove(fechaEntrada);
+                                m.remove(botonPersonalizado);
+                                m.remove(fechaSalida);
+                                m.remove(fechaEntrada);
 
-                            JLabel mensaje1  = new JLabel("Estas seguro que");
-                            Font fuente = new Font("Segoe UI Black", Font.PLAIN, 30);
-                            mensaje1 .setFont(fuente);
-                            AbsoluteConstraints medidas = new AbsoluteConstraints(300, 0, 300, 100);
-                            estasSeguro.add(mensaje1 , medidas);
+                                JLabel mensaje1  = new JLabel("Estas seguro que");
+                                Font fuente = new Font("Segoe UI Black", Font.PLAIN, 30);
+                                mensaje1 .setFont(fuente);
+                                AbsoluteConstraints medidas = new AbsoluteConstraints(300, 0, 300, 100);
+                                estasSeguro.add(mensaje1 , medidas);
 
-                           JLabel mensaje2  = new JLabel("queires alquila en esta fechas:");
-                           fuente = new Font("Segoe UI Black", Font.PLAIN, 30);
-                           mensaje2 .setFont(fuente);
-                           medidas = new AbsoluteConstraints(200, 35, 500, 100);
-                           estasSeguro.add(mensaje2 , medidas);
+                               JLabel mensaje2  = new JLabel("quieres alquilar en esta fechas:");
+                               fuente = new Font("Segoe UI Black", Font.PLAIN, 30);
+                               mensaje2 .setFont(fuente);
+                               medidas = new AbsoluteConstraints(200, 35, 500, 100);
+                               estasSeguro.add(mensaje2 , medidas);
 
-                           JLabel mensaje3  = new JLabel(""+localDateEntrada.getDayOfMonth()+"/"+localDateEntrada.getMonthValue()+"/"+localDateEntrada.getYear()+"   a   "+localDateSalida.getDayOfMonth()+"/"+localDateSalida.getMonthValue()+"/"+localDateSalida.getYear());
-                           fuente = new Font("Segoe UI Black", Font.PLAIN, 30);
-                           mensaje3 .setFont(fuente);
-                           medidas = new AbsoluteConstraints(225, 150, 500, 100);
-                           estasSeguro.add(mensaje3 , medidas);
+                               JLabel mensaje3  = new JLabel(""+localDateEntrada.getDayOfMonth()+"/"+localDateEntrada.getMonthValue()+"/"+localDateEntrada.getYear()+"   a   "+localDateSalida.getDayOfMonth()+"/"+localDateSalida.getMonthValue()+"/"+localDateSalida.getYear());
+                               fuente = new Font("Segoe UI Black", Font.PLAIN, 30);
+                               mensaje3 .setFont(fuente);
+                               medidas = new AbsoluteConstraints(225, 150, 500, 100);
+                               estasSeguro.add(mensaje3 , medidas);
 
-                           JLabel mensaje7  = new JLabel("Coste total:  "+totalc+" Creditos");
-                           fuente = new Font("Segoe UI Black", Font.PLAIN, 30);
-                           mensaje7 .setFont(fuente);
-                           medidas = new AbsoluteConstraints(230, 220, 500, 100);
-                           estasSeguro.add(mensaje7 , medidas);
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            JButton botonAprobar = new JButton("Aprobar");
-                            botonAprobar.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
-                            botonAprobar.setForeground(new Color(139, 195, 73));
-                            botonAprobar.setBackground(new Color(33, 40, 42));
-                            colorBorde = new Color(139, 195, 73);
-                            botonAprobar.setBorder(new LineBorder(colorBorde, 2));
-                            medidas = new AbsoluteConstraints(450, 360, 170, 70);
-                            estasSeguro.add(botonAprobar , medidas);
+                               JLabel mensaje7  = new JLabel("Coste total:  "+totalc+" Creditos");
+                               fuente = new Font("Segoe UI Black", Font.PLAIN, 30);
+                               mensaje7 .setFont(fuente);
+                               medidas = new AbsoluteConstraints(230, 220, 500, 100);
+                               estasSeguro.add(mensaje7 , medidas);
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                JButton botonAprobar = new JButton("Aprobar");
+                                botonAprobar.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
+                                botonAprobar.setForeground(new Color(139, 195, 73));
+                                botonAprobar.setBackground(new Color(33, 40, 42));
+                                colorBorde = new Color(139, 195, 73);
+                                botonAprobar.setBorder(new LineBorder(colorBorde, 2));
+                                medidas = new AbsoluteConstraints(450, 360, 170, 70);
+                                estasSeguro.add(botonAprobar , medidas);
 
-                            JButton botonCancelar = new JButton("Cancelar");
-                            botonCancelar.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
-                            botonCancelar.setForeground(new Color(139, 195, 73));
-                            botonCancelar.setBackground(new Color(33, 40, 42));
-                            botonCancelar.setBorder(new LineBorder(colorBorde, 2));
-                            medidas = new AbsoluteConstraints(200, 360, 170, 70);
-                            estasSeguro.add(botonCancelar , medidas);
+                                JButton botonCancelar = new JButton("Cancelar");
+                                botonCancelar.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
+                                botonCancelar.setForeground(new Color(139, 195, 73));
+                                botonCancelar.setBackground(new Color(33, 40, 42));
+                                botonCancelar.setBorder(new LineBorder(colorBorde, 2));
+                                medidas = new AbsoluteConstraints(200, 360, 170, 70);
+                                estasSeguro.add(botonCancelar , medidas);
 
-                            botonCancelar.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
+                                botonCancelar.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
 
-                                    m.remove(estasSeguro);
-                                    m.revalidate();
-                                    m.repaint();  // Añade esta línea para forzar la actualización de la interfaz
+                                        m.remove(estasSeguro);
+                                        m.revalidate();
+                                        m.repaint();  // Añade esta línea para forzar la actualización de la interfaz
 
-                                    AbsoluteConstraints medidas = new AbsoluteConstraints(450, 360, 170, 70);
+                                        AbsoluteConstraints medidas = new AbsoluteConstraints(450, 360, 170, 70);
 
-                                    m.add(botonPersonalizado,medidas);
-                                    medidas = new AbsoluteConstraints(100, 400, 200, 20);
-                                    m.add(fechaSalida,medidas);
-                                    medidas = new AbsoluteConstraints(100, 360, 200, 20);
-                                    m.add(fechaEntrada,medidas);
-                                }
-                            });
-                            botonAprobar.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    String sql = "INSERT INTO reservas (ID, ID_VIVIENDA, ID_USUARIO, FECHA_ENTRADA, FECHA_SALIDA, CREDITOS_TOTALES) VALUES (ID_VIVIENDA.NEXTVAL, ?, ?, ?, ?, ?)";
-                                    try (Connection conn = BD.makeConnection();
-                                         PreparedStatement statement = conn.prepareStatement(sql)) {
-
-                                        java.util.Date fechaEntradaUtil = fechaEntrada.getDate();
-                                        java.sql.Date fechaEntrada = new java.sql.Date(fechaEntradaUtil.getTime());
-                                        java.util.Date fechaSalidaUtil = fechaSalida.getDate();
-                                        java.sql.Date fechaSalida = new java.sql.Date(fechaSalidaUtil.getTime());
-
-                                        statement.setInt(1, id);
-                                        statement.setInt(2, BD.comprobarUsuarioObj().getId());
-                                        statement.setDate(3, fechaEntrada);
-                                        statement.setDate(4, fechaSalida);
-                                        statement.setInt(5, totalc);
-
-                                        int filasAfectadas = statement.executeUpdate();
-
-                                        if (filasAfectadas > 0) {
-                                            System.out.println("Inserción exitosa. Filas insertadas: " + filasAfectadas);
-                                        } else {
-                                            System.out.println("No se insertaron filas.");
-                                        }
-                                    } catch (SQLException a) {
-                                        a.printStackTrace();
+                                        m.add(botonPersonalizado,medidas);
+                                        medidas = new AbsoluteConstraints(100, 400, 200, 20);
+                                        m.add(fechaSalida,medidas);
+                                        medidas = new AbsoluteConstraints(100, 360, 200, 20);
+                                        m.add(fechaEntrada,medidas);
                                     }
+                                });
+                                botonAprobar.addActionListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent e) {
+                                        String sql = "INSERT INTO reservas (ID, ID_VIVIENDA, ID_USUARIO, FECHA_ENTRADA, FECHA_SALIDA, CREDITOS_TOTALES) VALUES (ID_VIVIENDA.NEXTVAL, ?, ?, ?, ?, ?)";
+                                        try (Connection conn = BD.makeConnection();
+                                             PreparedStatement statement = conn.prepareStatement(sql)) {
 
-                                    try {
-                                        String sqlU = "UPDATE USUARIOS SET creditos = ? WHERE id = ?";
+                                            java.util.Date fechaEntradaUtil = fechaEntrada.getDate();
+                                            java.sql.Date fechaEntrada = new java.sql.Date(fechaEntradaUtil.getTime());
+                                            java.util.Date fechaSalidaUtil = fechaSalida.getDate();
+                                            java.sql.Date fechaSalida = new java.sql.Date(fechaSalidaUtil.getTime());
 
-                                        PreparedStatement statement = BD.makeConnection().prepareStatement(sqlU);
+                                            statement.setInt(1, id);
+                                            statement.setInt(2, BD.comprobarUsuarioObj().getId());
+                                            statement.setDate(3, fechaEntrada);
+                                            statement.setDate(4, fechaSalida);
+                                            statement.setInt(5, totalc);
 
-                                        creditos -= totalc;
+                                            int filasAfectadas = statement.executeUpdate();
 
-                                        statement.setInt(1, creditos);
-                                        statement.setInt(2, BD.comprobarUsuarioObj().getId());
-
-                                        // Ejecuta la actualización
-                                        int filasActualizadas = statement.executeUpdate();
-
-                                        if (filasActualizadas > 0) {
-                                            System.out.println("Actualización exitosa. Filas actualizadas: " + filasActualizadas);
-
-                                            nCreditos.setText(String.valueOf(creditos));
-
-                                        } else {
-                                            System.out.println("Ninguna fila fue actualizada.");
+                                            if (filasAfectadas > 0) {
+                                                System.out.println("Inserción exitosa. Filas insertadas: " + filasAfectadas);
+                                            } else {
+                                                System.out.println("No se insertaron filas.");
+                                            }
+                                        } catch (SQLException a) {
+                                            a.printStackTrace();
                                         }
-                                    } catch (SQLException u) {u.printStackTrace();}
 
-                                    m.remove(estasSeguro);
-                                    m.revalidate();
-                                    m.repaint();
+                                        try {
+                                            String sqlU = "UPDATE USUARIOS SET creditos = ? WHERE id = ?";
 
-                                    AbsoluteConstraints medidas = new AbsoluteConstraints(450, 360, 170, 70);
-                                    m.add(botonPersonalizado, medidas);
-                                    medidas = new AbsoluteConstraints(100, 400, 200, 20);
-                                    m.add(fechaSalida, medidas);
-                                    medidas = new AbsoluteConstraints(100, 360, 200, 20);
-                                    m.add(fechaEntrada, medidas);
-                                    
-                                    JOptionPane.showMessageDialog(m, "La reserva se a hecho correctamente.", "Alerta", JOptionPane.WARNING_MESSAGE);
-                                    registro.removeAll();
-                                    registro.revalidate();
-                                    crearPaneles();
-                                }
-                            });
+                                            PreparedStatement statement = BD.makeConnection().prepareStatement(sqlU);
+
+                                            creditos -= totalc;
+
+                                            statement.setInt(1, creditos);
+                                            statement.setInt(2, BD.comprobarUsuarioObj().getId());
+
+                                            // Ejecuta la actualización
+                                            int filasActualizadas = statement.executeUpdate();
+
+                                            if (filasActualizadas > 0) {
+                                                System.out.println("Actualización exitosa. Filas actualizadas: " + filasActualizadas);
+
+                                                nCreditos.setText(String.valueOf(creditos));
+
+                                            } else {
+                                                System.out.println("Ninguna fila fue actualizada.");
+                                            }
+                                        } catch (SQLException u) {u.printStackTrace();}
+
+                                        m.remove(estasSeguro);
+                                        m.revalidate();
+                                        m.repaint();
+
+                                        AbsoluteConstraints medidas = new AbsoluteConstraints(450, 360, 170, 70);
+                                        m.add(botonPersonalizado, medidas);
+                                        medidas = new AbsoluteConstraints(100, 400, 200, 20);
+                                        m.add(fechaSalida, medidas);
+                                        medidas = new AbsoluteConstraints(100, 360, 200, 20);
+                                        m.add(fechaEntrada, medidas);
+
+                                        JOptionPane.showMessageDialog(m, "La reserva se a hecho correctamente.", "Alerta", JOptionPane.WARNING_MESSAGE);
+                                        registro.removeAll();
+                                        registro.revalidate();
+                                        crearPaneles();
+                                    }
+                                });
+                            } else {JOptionPane.showMessageDialog(m, "Las fechas estan del reves", "Alerta", JOptionPane.WARNING_MESSAGE);}
                         } else {JOptionPane.showMessageDialog(m, "Las fechas son anteriores a la actual", "Alerta", JOptionPane.WARNING_MESSAGE);}
                     } else {JOptionPane.showMessageDialog(m, "No tienes creditos suficientes", "Alerta", JOptionPane.WARNING_MESSAGE);}
                 } else {JOptionPane.showMessageDialog(m, "No has seleccionado ninguna fecha", "Alerta", JOptionPane.WARNING_MESSAGE);}
@@ -827,9 +841,6 @@ public class Principal extends javax.swing.JFrame {
         transferencia = new javax.swing.JButton();
         filtro = new javax.swing.JPanel();
         SideBar = new javax.swing.JPanel();
-        lista = new javax.swing.JLabel();
-        favoritos = new javax.swing.JLabel();
-        buscador1 = new javax.swing.JLabel();
         perfilBut = new javax.swing.JButton();
         botonCreditos = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
@@ -837,7 +848,7 @@ public class Principal extends javax.swing.JFrame {
         nCreditos = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         registro = new javax.swing.JPanel();
         nombre_text3 = new javax.swing.JLabel();
@@ -974,7 +985,7 @@ public class Principal extends javax.swing.JFrame {
                 boton100ActionPerformed(evt);
             }
         });
-        panelCreditos.add(boton100, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 56, 85, 85));
+        panelCreditos.add(boton100, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 56, 100, 85));
 
         inputDinero.setToolTipText("");
         inputDinero.addActionListener(new java.awt.event.ActionListener() {
@@ -1037,33 +1048,16 @@ public class Principal extends javax.swing.JFrame {
         SideBar.setBackground(new java.awt.Color(33, 40, 42));
         SideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/lista2.PNG"))); // NOI18N
-        lista.setText("jLabel2");
-        lista.setMaximumSize(new java.awt.Dimension(40, 40));
-        lista.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(lista, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 50, 50));
-
-        favoritos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/historial.PNG"))); // NOI18N
-        favoritos.setText("jLabel2");
-        favoritos.setMaximumSize(new java.awt.Dimension(40, 40));
-        favoritos.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(favoritos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 50, 50));
-
-        buscador1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/buscador.PNG"))); // NOI18N
-        buscador1.setText("buscador");
-        buscador1.setMaximumSize(new java.awt.Dimension(40, 40));
-        buscador1.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(buscador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 50, 50));
-
         perfilBut.setText("  ");
         perfilBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 perfilButActionPerformed(evt);
             }
         });
-        SideBar.add(perfilBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 720, -1, -1));
+        SideBar.add(perfilBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         botonCreditos.setBackground(new java.awt.Color(139, 195, 73));
+        botonCreditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/iconoCredito.png"))); // NOI18N
         botonCreditos.setBorderPainted(false);
         botonCreditos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1075,13 +1069,13 @@ public class Principal extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(139, 195, 73));
 
         nCreditos1.setBackground(new java.awt.Color(139, 195, 73));
-        nCreditos1.setText("Creditos:");
+        nCreditos1.setText(" Creditos:");
         nCreditos1.setToolTipText("");
         nCreditos1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         nCreditos1.setInheritsPopupMenu(false);
 
         nCreditos.setBackground(new java.awt.Color(139, 195, 73));
-        nCreditos.setText("n");
+        nCreditos.setText("     n");
         nCreditos.setToolTipText("");
         nCreditos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         nCreditos.setInheritsPopupMenu(false);
@@ -1114,7 +1108,7 @@ public class Principal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, -1, -1));
+        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 100, -1));
 
         jButton5.setBackground(new java.awt.Color(139, 195, 73));
         jButton5.setText("Reservas");
@@ -1123,16 +1117,16 @@ public class Principal extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        SideBar.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 660, -1, -1));
+        SideBar.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 100, -1));
 
-        jButton6.setBackground(new java.awt.Color(139, 195, 73));
-        jButton6.setText("Crear Alquiler");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButton7.setBackground(new java.awt.Color(139, 195, 73));
+        jButton7.setText("Inicio");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButton7ActionPerformed(evt);
             }
         });
-        SideBar.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, -1, -1));
+        SideBar.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 100, -1));
 
         Panel_General.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 120, 1070));
 
@@ -1352,7 +1346,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Historial Frame = new Historial(); // Crea una instancia del JFrame "Register"
+        Historial Frame = new Historial(); 
         Frame.setVisible(true);
         this.dispose();
 
@@ -1360,15 +1354,17 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         
-        ReservasHechas Frame = new ReservasHechas(); // Crea una instancia del JFrame "Register"
+        ReservasHechas Frame = new ReservasHechas();
         Frame.setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        Principal Frame = new Principal();
+        Frame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1430,8 +1426,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton boton30;
     private javax.swing.JButton boton50;
     private javax.swing.JButton botonCreditos;
-    private javax.swing.JLabel buscador1;
-    private javax.swing.JLabel favoritos;
     private javax.swing.JPanel filtro;
     private javax.swing.JPanel imagen;
     private javax.swing.JTextField inputDinero;
@@ -1440,7 +1434,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1461,7 +1455,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lista;
     private javax.swing.JPanel modelAlquiler;
     private javax.swing.JLabel nCreditos;
     private javax.swing.JLabel nCreditos1;

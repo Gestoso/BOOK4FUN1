@@ -4,6 +4,7 @@
  */
 package book4fun;
 
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
@@ -37,7 +38,12 @@ public boolean entrado = true;
         telefono.setText(usu.telefono);
         creditosl.setText("" + usu.creditos);
         iniciarlabels();
-        
+        ImageIcon icon = new ImageIcon(Principal.class.getResource("/book4fun/imagenes/perfil.jpg"));
+        java.awt.Image image = icon.getImage();
+        java.awt.Image newImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        perfilBut.setPreferredSize(new Dimension(50, 50));
+        ImageIcon newIcon = new ImageIcon(newImage);
+        perfilBut.setIcon(newIcon);
     }
     public void guardarDatos(Usuario usu) {
         String nombre = nombreedit.getText();
@@ -158,6 +164,15 @@ contraedit.addMouseListener(new MouseAdapter() {
         telefonoedit = new javax.swing.JTextField();
         contraedit = new javax.swing.JTextField();
         Raya_verde1 = new javax.swing.JPanel();
+        SideBar = new javax.swing.JPanel();
+        perfilBut = new javax.swing.JButton();
+        botonCreditos = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        nCreditos1 = new javax.swing.JLabel();
+        nCreditos = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         Imagen = new javax.swing.JLabel();
@@ -175,15 +190,6 @@ contraedit.addMouseListener(new MouseAdapter() {
         email = new javax.swing.JLabel();
         telefono = new javax.swing.JLabel();
         creditosl = new javax.swing.JLabel();
-        SideBar = new javax.swing.JPanel();
-        lista = new javax.swing.JLabel();
-        favoritos = new javax.swing.JLabel();
-        buscador1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        botonCreditos = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        nCreditos1 = new javax.swing.JLabel();
-        nCreditos = new javax.swing.JLabel();
         editar = new javax.swing.JButton();
 
         panelCreditos.setBackground(new java.awt.Color(33, 40, 42));
@@ -496,6 +502,91 @@ contraedit.addMouseListener(new MouseAdapter() {
         );
 
         jPanel1.add(Raya_verde1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 1, -1));
+
+        SideBar.setBackground(new java.awt.Color(33, 40, 42));
+        SideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        perfilBut.setText("  ");
+        perfilBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perfilButActionPerformed(evt);
+            }
+        });
+        SideBar.add(perfilBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        botonCreditos.setBackground(new java.awt.Color(139, 195, 73));
+        botonCreditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/iconoCredito.png"))); // NOI18N
+        botonCreditos.setBorderPainted(false);
+        botonCreditos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCreditosActionPerformed(evt);
+            }
+        });
+        SideBar.add(botonCreditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 70, 60));
+
+        jPanel6.setBackground(new java.awt.Color(139, 195, 73));
+
+        nCreditos1.setBackground(new java.awt.Color(139, 195, 73));
+        nCreditos1.setText(" Creditos:");
+        nCreditos1.setToolTipText("");
+        nCreditos1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        nCreditos1.setInheritsPopupMenu(false);
+
+        nCreditos.setBackground(new java.awt.Color(139, 195, 73));
+        nCreditos.setText("     n");
+        nCreditos.setToolTipText("");
+        nCreditos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        nCreditos.setInheritsPopupMenu(false);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nCreditos1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addComponent(nCreditos1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        SideBar.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 70, 50));
+
+        jButton1.setBackground(new java.awt.Color(139, 195, 73));
+        jButton1.setText("Historial");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 100, -1));
+
+        jButton5.setBackground(new java.awt.Color(139, 195, 73));
+        jButton5.setText("Reservas");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        SideBar.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 100, -1));
+
+        jButton7.setBackground(new java.awt.Color(139, 195, 73));
+        jButton7.setText("Inicio");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        SideBar.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 100, -1));
+
+        jPanel1.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 120, 1070));
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 190, 200));
 
         jTextField1.setEditable(false);
@@ -575,84 +666,6 @@ contraedit.addMouseListener(new MouseAdapter() {
         creditosl.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(creditosl, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 500, 170, 30));
 
-        SideBar.setBackground(new java.awt.Color(33, 40, 42));
-        SideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/lista2.PNG"))); // NOI18N
-        lista.setText("jLabel2");
-        lista.setMaximumSize(new java.awt.Dimension(40, 40));
-        lista.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(lista, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 50, 50));
-
-        favoritos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/historial.PNG"))); // NOI18N
-        favoritos.setText("jLabel2");
-        favoritos.setMaximumSize(new java.awt.Dimension(40, 40));
-        favoritos.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(favoritos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 50, 50));
-
-        buscador1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/buscador.PNG"))); // NOI18N
-        buscador1.setText("buscador");
-        buscador1.setMaximumSize(new java.awt.Dimension(40, 40));
-        buscador1.setMinimumSize(new java.awt.Dimension(40, 40));
-        SideBar.add(buscador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 50, 50));
-
-        jButton1.setBackground(new java.awt.Color(33, 40, 42));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/profile.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        SideBar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-
-        botonCreditos.setBackground(new java.awt.Color(139, 195, 73));
-        botonCreditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/book4fun/imagenes/iconoCredito.png"))); // NOI18N
-        botonCreditos.setBorderPainted(false);
-        botonCreditos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCreditosActionPerformed(evt);
-            }
-        });
-        SideBar.add(botonCreditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 70, 60));
-
-        jPanel6.setBackground(new java.awt.Color(139, 195, 73));
-
-        nCreditos1.setBackground(new java.awt.Color(139, 195, 73));
-        nCreditos1.setText("Creditos:");
-        nCreditos1.setToolTipText("");
-        nCreditos1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        nCreditos1.setInheritsPopupMenu(false);
-
-        nCreditos.setBackground(new java.awt.Color(139, 195, 73));
-        nCreditos.setText("n");
-        nCreditos.setToolTipText("");
-        nCreditos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        nCreditos.setInheritsPopupMenu(false);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nCreditos1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addComponent(nCreditos1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        SideBar.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 70, 50));
-
-        jPanel1.add(SideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 1070));
-
         editar.setBackground(new java.awt.Color(153, 255, 153));
         editar.setText("Modificar Perfil");
         editar.addActionListener(new java.awt.event.ActionListener() {
@@ -679,22 +692,6 @@ contraedit.addMouseListener(new MouseAdapter() {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void botonCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCreditosActionPerformed
-
-        if(entrado == true){
-            entrado = false;
-            panelCreditos.setVisible(true);
-        } else {
-            panelCreditos.setVisible(false);
-            entrado = true;
-        }
-
-    }//GEN-LAST:event_botonCreditosActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
@@ -821,7 +818,11 @@ contraedit.addMouseListener(new MouseAdapter() {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         guardarDatos(usu);
-                paneleditar.setVisible(false);
+        paneleditar.setVisible(false);
+        usu = BD.comprobarUsuarioObj();
+         Perfil Frame = new Perfil();
+        Frame.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_guardarActionPerformed
 
@@ -832,6 +833,44 @@ contraedit.addMouseListener(new MouseAdapter() {
     private void nombreeditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreeditActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreeditActionPerformed
+
+    private void perfilButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilButActionPerformed
+        Perfil Frame = new Perfil(); // Crea una instancia del JFrame "Register"
+        Frame.setVisible(true); // Hace visible el JFrame "Register"
+        this.dispose();
+    }//GEN-LAST:event_perfilButActionPerformed
+
+    private void botonCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCreditosActionPerformed
+
+        if(entrado == true){
+            entrado = false;
+            panelCreditos.setVisible(true);
+        } else {
+            panelCreditos.setVisible(false);
+            entrado = true;
+        }
+    }//GEN-LAST:event_botonCreditosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        Historial Frame = new Historial();
+        Frame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+        ReservasHechas Frame = new ReservasHechas();
+        Frame.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        Principal Frame = new Principal();
+        Frame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -880,7 +919,6 @@ contraedit.addMouseListener(new MouseAdapter() {
     private javax.swing.JButton boton30;
     private javax.swing.JButton boton50;
     private javax.swing.JButton botonCreditos;
-    private javax.swing.JLabel buscador1;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField contraedit;
     private javax.swing.JLabel creditosl;
@@ -891,13 +929,14 @@ contraedit.addMouseListener(new MouseAdapter() {
     private javax.swing.JButton editar;
     private javax.swing.JLabel email;
     private javax.swing.JTextField emailedit;
-    private javax.swing.JLabel favoritos;
     private javax.swing.JButton guardar;
     private javax.swing.JTextField inputDinero;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -909,7 +948,6 @@ contraedit.addMouseListener(new MouseAdapter() {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lista;
     private javax.swing.JLabel nCreditos;
     private javax.swing.JLabel nCreditos1;
     private javax.swing.JLabel nombre_text;
@@ -925,6 +963,7 @@ contraedit.addMouseListener(new MouseAdapter() {
     private javax.swing.JPanel panelNoTransRealizada;
     private javax.swing.JPanel panelTransRealizada;
     private javax.swing.JPanel paneleditar;
+    private javax.swing.JButton perfilBut;
     private javax.swing.JLabel telefono;
     private javax.swing.JTextField telefonoedit;
     private javax.swing.JButton transferencia;

@@ -367,8 +367,10 @@ public class Register extends javax.swing.JFrame {
         
         if (campos) {
             
-            Usuario usu = BD.insertaUsuario(BD.makeConnection(), Controlador.getDNI(), Controlador.getNombre(), Controlador.getApellido(),Controlador.getEmail(), Controlador.getTelefono(),Controlador.getContrasenya(), Controlador.getDireccion(), 0);
-        if (usu == null) {
+            Usuario usu = BD.insertaUsuario(BD.makeConnection(), Controlador.getDNI(), Controlador.getNombre(), Controlador.getApellido(),Controlador.getEmail(), Controlador.getTelefono(),Controlador.getContrasenya(), Controlador.getDireccion(),"sgmsdgk" ,0);
+            Controlador.setUsuario(nombre_field.getText());
+            Controlador.setContrasenya(contra_field.getText());
+            if (usu == null) {
             
             System.out.println("No se inserto el usuario");
         } else {
